@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1033875169844",
+    "firebase_url": "https://tofsologia-b948b.firebaseio.com",
+    "project_id": "tofsologia-b948b",
+    "storage_bucket": "tofsologia-b948b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1033875169844:android:b83df3ed4f28c048",
+        "android_client_info": {
+          "package_name": "restforyou.com.tofsologia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1033875169844-mpssn5ln2utfobrq3bs10sej09hagsne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "restforyou.com.tofsologia",
+            "certificate_hash": "61f419c1ae759192378bba2d2bb8ac765c6338f6"
+          }
+        },
+        {
+          "client_id": "1033875169844-jcc0qctn61gshjih31g275t3ligti6et.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAF7a5mUQOgvdA9SYOnV2z3NwJX9AKVSAs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1033875169844-jcc0qctn61gshjih31g275t3ligti6et.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
