@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="restforyou.com.tofsologia">
 
     <application
@@ -9,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".views.WorkingExampleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +20,13 @@
 
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"
-            android:value="ocr"/>
+            android:value="ocr" />
+
+        <activity android:name=".views.SplashActivity" />
+        <activity android:name=".views.LoginActivity" />
+        <activity android:name=".views.ScanActivity" />
+        <activity android:name=".views.TextRecognitionActivity" />
+        <activity android:name=".views.ReadyTextActivity"></activity>
     </application>
 
 </manifest>

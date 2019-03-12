@@ -18,7 +18,7 @@ android {
     }
 
 
-    packagingOptions{
+    packagingOptions {
         exclude 'META-INF/androidx.exifinterface_exifinterface.version'
         exclude 'META-INF/proguard/androidx-annotations.pro'
     }
@@ -37,6 +37,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-ml-model-interpreter:17.0.3'
     implementation 'com.google.firebase:firebase-ml-natural-language-language-id-model:18.0.2'
     implementation 'com.google.firebase:firebase-ml-vision:19.0.2'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
+    implementation 'com.jakewharton:butterknife:8.6.0'
 
 }
 
