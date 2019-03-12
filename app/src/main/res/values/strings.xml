@@ -5,4 +5,9 @@
     <string name="find_face_contour_button">Find face contour</string>
     <string name="find_text_cloud_button">Find text (cloud)</string>
     <string name="find_objects_button">Find objects</string>
+    <string name="jump_in">Jump in</string>
+    <string name="scan">Scan</string>
+    <string name="make_picture">Make picture</string>
+    <string name="show_example">Show example</string>
+    <string name="ready_text_activity">Ready text activity</string>
 </resources>
