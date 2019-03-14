@@ -27,8 +27,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void startRelevantActivity(){
-        Intent toLoginActivityIntent = new Intent(SplashActivity.this, LoginActivity.class);
-        startActivity(toLoginActivityIntent);
+//        Intent toLoginActivityIntent = new Intent(SplashActivity.this, LoginActivity.class);
+//        startActivity(toLoginActivityIntent);
+        Intent toScanActivityIntent = new Intent(SplashActivity.this, ScanActivity.class);
+        startActivity(toScanActivityIntent);
         finish();
     }
 

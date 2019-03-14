@@ -10,4 +10,5 @@
     <string name="make_picture">Make picture</string>
     <string name="show_example">Show example</string>
     <string name="ready_text_activity">Ready text activity</string>
+    <string name="choose_from_gallery">Choose from gallery</string>
 </resources>
