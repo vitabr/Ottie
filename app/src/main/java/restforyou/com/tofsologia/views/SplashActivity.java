@@ -29,6 +29,7 @@ public class SplashActivity extends AppCompatActivity {
     private void startRelevantActivity(){
         Intent toLoginActivityIntent = new Intent(SplashActivity.this, LoginActivity.class);
         startActivity(toLoginActivityIntent);
+        finish();
     }
 
     private void logIt(String message){

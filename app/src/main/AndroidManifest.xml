@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.WorkingExampleActivity">
+        <activity android:name=".views.SplashActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,15 +19,16 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
-            android:value="ocr" />
-
-        <activity android:name=".views.SplashActivity" />
+        <activity android:name=".views.WorkingExampleActivity" />
         <activity android:name=".views.LoginActivity" />
         <activity android:name=".views.ScanActivity" />
         <activity android:name=".views.TextRecognitionActivity" />
         <activity android:name=".views.ReadyTextActivity"></activity>
+
+        <meta-data
+            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+            android:value="ocr" />
+
     </application>
 
 </manifest>
