@@ -4,7 +4,7 @@ public class ToDoStuff {
     //todo mvp:
     //1. make picture
     //2. recognize picture
-    //3. save recognised picture
+    //3. save recognised text
 
     // using last version of butterKnife force to migrate to androidX
     // http://jakewharton.github.io/butterknife/

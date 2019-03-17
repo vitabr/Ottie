@@ -13,6 +13,8 @@ import restforyou.com.tofsologia.R;
 
 public class LoginActivity extends AppCompatActivity {
 
+    //we will use this part only if we will need firebase db
+
     @BindView(R.id.btn_jump_in)
     Button buttonJumpIn;
 

@@ -12,9 +12,9 @@
         android:id="@+id/btn_scan_picture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/scan_activity_rounded_btn"
         android:text="@string/scan"
         android:textColor="@color/colorDarkBlue"
@@ -27,9 +27,9 @@
         android:id="@+id/btn_make_picture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:background="@drawable/scan_activity_rounded_btn"
         android:text="@string/make_picture"
         android:textColor="@color/colorDarkBlue"
@@ -42,9 +42,9 @@
         android:id="@+id/btn_choose_from_galery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:background="@drawable/scan_activity_rounded_btn"
         android:text="@string/choose_from_gallery"
         android:textColor="@color/colorDarkBlue"
@@ -53,17 +53,66 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_make_picture" />
 
-    <ImageView
-        android:id="@+id/img_temporary_picture"
-        android:layout_width="350dp"
-        android:layout_height="350dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="92dp"
-        android:src="@drawable/scan_activity_do_something"
-        app:layout_constraintBottom_toBottomOf="parent"
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_choose_from_galery" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_choose_from_galery">
+
+        <ImageView
+            android:id="@+id/img_ready_photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/img_temporary_picture"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:src="@drawable/scan_activity_empty" />
+
+
+
+        <TextView
+            android:id="@+id/tv_empty_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@+id/img_temporary_picture"
+            android:layout_marginTop="10dp"
+            android:text="Please provide \n image for recognition"
+            android:textAlignment="center"
+            android:textColor="@color/colorDarkBlue"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cornerRadius="56dp"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:clickable="true"
+        android:visibility="gone"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:icon="@drawable/scan_activity_done3"
+        android:textAppearance="?android:attr/textAppearanceButton"
+        />
+
 
 </android.support.constraint.ConstraintLayout>
