@@ -13,10 +13,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import restforyou.com.tofsologia.R;
@@ -76,6 +74,14 @@ public class ScanActivity extends AppCompatActivity {
             }
         });
 
+        materialButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ScanActivity.this, TextRecognitionActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
     private void showTextRecognitionActivity(){
@@ -104,9 +110,6 @@ public class ScanActivity extends AppCompatActivity {
                 textViewEmptyText.setVisibility(View.GONE);
                 imageViewReadyImg.setVisibility(View.VISIBLE);
                 imageViewReadyImg.setImageBitmap(selectedImage);
-
-                //Intent i = new Intent(ScanActivity.this, TextRecognitionActivity.class);
-                //startActivity(i);
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
