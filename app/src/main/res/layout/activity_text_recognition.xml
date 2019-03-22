@@ -5,25 +5,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.TextRecognitionActivity">
+    tools:context=".views.TextRecognitionActivity"
+    android:theme="@style/Theme.AppCompat.NoActionBar">
 
-    <Button
-        android:id="@+id/btn_show_example"
-        android:layout_width="match_parent"
+
+    <ImageButton
+        android:id="@+id/btn_to_ready_text_activity"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/show_example"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/scan_activity_done"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <restforyou.com.tofsologia.GraphicOverlay
+        android:id="@+id/go_image_for_recognition"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btn_to_ready_text_activity"
+    <EditText
+        android:id="@+id/et_recognized_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:layout_marginTop="8dp"
-        android:text="@string/ready_text_activity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_show_example" />
+        app:layout_constraintTop_toBottomOf="@+id/go_image_for_recognition" />
 
 </android.support.constraint.ConstraintLayout>

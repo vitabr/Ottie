@@ -20,13 +20,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import restforyou.com.tofsologia.R;
 import restforyou.com.tofsologia.utils.Constants;
 import restforyou.com.tofsologia.utils.photo.PhotoUtils;
 
-public class ScanActivity extends AppCompatActivity implements Constants{
+public class ScanActivity extends AppCompatActivity implements Constants {
 
 
     @BindView(R.id.btn_make_picture)
@@ -54,12 +55,12 @@ public class ScanActivity extends AppCompatActivity implements Constants{
     }
 
 
-    private void setInitialUiElements(){
+    private void setInitialUiElements() {
 
 
     }
 
-    private void setListeners(){
+    private void setListeners() {
         buttonMakePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,17 +73,10 @@ public class ScanActivity extends AppCompatActivity implements Constants{
             public void onClick(View view) {
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
                 photoPickerIntent.setType("image/*");
-                startActivityForResult(photoPickerIntent, RESULT_LOAD_IMAGE);
+                startActivityForResult(photoPickerIntent, Constants.REQUEST_CHOOSE_IMAGE);
             }
         });
 
-        materialButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(ScanActivity.this, TextRecognitionActivity.class);
-                startActivity(i);
-            }
-        });
 
     }
 
@@ -108,12 +102,9 @@ public class ScanActivity extends AppCompatActivity implements Constants{
         }
     }
 
-    private void showTextRecognitionActivity(){
-        Intent toTextRecognitionActivity = new Intent(ScanActivity.this, TextRecognitionActivity.class);
-        startActivity(toTextRecognitionActivity);
-    }
 
-    private void logIt(String message){
+
+    private void logIt(String message) {
         String TAG = this.getClass().getSimpleName();
         Log.e(TAG, message);
     }
@@ -121,44 +112,46 @@ public class ScanActivity extends AppCompatActivity implements Constants{
     @Override
     protected void onActivityResult(int reqCode, int resultCode, Intent data) {
         super.onActivityResult(reqCode, resultCode, data);
-        switch (reqCode){
+        switch (reqCode) {
             case RESULT_LOAD_IMAGE:
                 if (resultCode == RESULT_OK) {
-                    try {
-                        final Uri imageUri = data.getData();
-                        logIt(imageUri+" ");
-                        //final InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                        //final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                        //todo close input stream
-                        Bitmap selectedImage = BitmapFactory.decodeFile(imageUri.getPath());
-                        showPrewiew(selectedImage);
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Toast.makeText(ScanActivity.this, "Something went wrong", Toast.LENGTH_LONG).show();
-                    }finally {
-
-                    }
-
-                }else {
-                    Toast.makeText(ScanActivity.this, "You haven't picked Image",Toast.LENGTH_LONG).show();
+                    final Uri imageUri = data.getData();
+                    showTextRecognitionActivity(imageUri);
+                } else {
+                    Toast.makeText(ScanActivity.this, "You haven't picked Image", Toast.LENGTH_LONG).show();
                 }
                 break;
 
             case REQUEST_CAPTURE_IMAGE:
-
-                Bitmap bitmap = BitmapFactory.decodeFile(capturedPhotoFile.getAbsolutePath());
-                showPrewiew(bitmap);
+                final Uri imageUri = Uri.fromFile(capturedPhotoFile);
+                showTextRecognitionActivity(imageUri);
                 break;
+        }
+
+
+    }
+
+    private void showTextRecognitionActivity(Uri imageUri) {
+        logIt(imageUri + " ");
+        if (imageUri != null) {
+            logIt(imageUri + " ");
+            Intent toTextRecActivityIntent = new Intent(ScanActivity.this, TextRecognitionActivity.class);
+            toTextRecActivityIntent.setAction(Constants.RECEIVED_IMAGE);
+            toTextRecActivityIntent.putExtra(Constants.IMAGE_URL, imageUri.toString());
+            startActivity(toTextRecActivityIntent);
         }
     }
 
-    private void showPrewiew(Bitmap bitmap){
-        materialButton.setText("Recognize");
-        materialButton.setVisibility(View.VISIBLE);
-        imageViewTempPhoto.setVisibility(View.GONE);
-        textViewEmptyText.setVisibility(View.GONE);
-        imageViewReadyImg.setVisibility(View.VISIBLE);
-        imageViewReadyImg.setImageBitmap(bitmap);
-    }
+    //part for text recognition activity
+//    private void showPrewiew(Bitmap bitmap) {
+//        materialButton.setText("Recognize");
+//        materialButton.setVisibility(View.VISIBLE);
+//        imageViewTempPhoto.setVisibility(View.GONE);
+//        textViewEmptyText.setVisibility(View.GONE);
+//        imageViewReadyImg.setVisibility(View.VISIBLE);
+//        imageViewReadyImg.setImageBitmap(bitmap);
+//    }
+
+
+
 }
