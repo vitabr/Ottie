@@ -1,23 +1,33 @@
 package restforyou.com.tofsologia.views;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import restforyou.com.tofsologia.GraphicOverlay;
 import restforyou.com.tofsologia.R;
 
 import static restforyou.com.tofsologia.utils.Constants.IMAGE_URL;
 import static restforyou.com.tofsologia.utils.Constants.RECEIVED_IMAGE;
 
 public class TextRecognitionActivity extends AppCompatActivity {
-//    @BindView(R.id.btn_to_ready_text_activity)
-//    Button buttonReadyActivity;
+
+    @BindView(R.id.et_recognized_text)
+    EditText editTextRecognized;
+    @BindView(R.id.iv_image_for_recognition)
+    ImageView imageViewForRecognition;
 //    @BindView(R.id.go_image_for_recognition)
-//    GraphicOverlay ImageForRecognition;
+//    GraphicOverlay imageForRecognition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +40,27 @@ public class TextRecognitionActivity extends AppCompatActivity {
 
         Intent receivedIntent = getIntent();
         if (receivedIntent.getAction() == RECEIVED_IMAGE && receivedIntent.getAction() != null ){
-            receivedIntent.getStringExtra(IMAGE_URL);
+            //String imageUri = receivedIntent.getStringExtra(IMAGE_URL);
+
+            Uri imageUri = Uri.parse(receivedIntent.getStringExtra(IMAGE_URL));
+
+            //Bitmap selectedImage = BitmapFactory.decodeFile("file://" + receivedIntent.getStringExtra(IMAGE_URL).replace("content://", ""));
+            //imageViewForRecognition.setImageBitmap(selectedImage);
+            imageViewForRecognition.setImageURI(imageUri);
+
             logIt("action " + receivedIntent.getAction()+ " url " + receivedIntent.getStringExtra(IMAGE_URL));
+
+            final InputStream imageStream;
+           // try {
+                //imageStream = getContentResolver().openInputStream(imageUri);
+                //final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                //imageViewForRecognition.setImageBitmap(selectedImage);
+
+            //} catch (FileNotFoundException e) {
+            //    e.printStackTrace();
+            //}
+
+
         }
     }
 
