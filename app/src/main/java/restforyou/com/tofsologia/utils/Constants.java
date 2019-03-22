@@ -1,5 +1,6 @@
 package restforyou.com.tofsologia.utils;
 
-public class Constants {
-    public static int RESULT_LOAD_IMAGE = 1;
+public interface Constants {
+    int RESULT_LOAD_IMAGE = 1;
+    int REQUEST_CAPTURE_IMAGE = 2;
 }
