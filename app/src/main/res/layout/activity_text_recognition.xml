@@ -10,41 +10,76 @@
 
 
     <ImageButton
-        android:id="@+id/btn_to_ready_text_activity"
+        android:id="@+id/btn_text_ready"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:src="@drawable/scan_activity_done"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/iv_image_for_recognition"
         app:layout_constraintTop_toTopOf="parent" />
 
     <restforyou.com.tofsologia.utils.TouchImageView
         android:id="@+id/iv_image_for_recognition"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="0dp"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toTopOf="@+id/et_recognized_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_text_ready" />
 
     <restforyou.com.tofsologia.views.GraphicOverlay
         android:id="@+id/go_image_for_recognition"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_image_for_recognition"
+        app:layout_constraintEnd_toEndOf="@+id/iv_image_for_recognition"
+        app:layout_constraintStart_toStartOf="@+id/iv_image_for_recognition"
+        app:layout_constraintTop_toTopOf="@+id/iv_image_for_recognition"
+        android:visibility="invisible"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:fillViewport="true"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
 
+        <TextView
+            android:id="@+id/tv_recognized_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:inputType="textMultiLine"
+            android:padding="10dp" />
+
+    </ScrollView>
     <EditText
         android:id="@+id/et_recognized_text"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp"
-        android:inputType="text"
+        android:layout_height="250dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:inputType="textMultiLine"
+        android:padding="10dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_image_for_recognition" />
+        android:visibility="invisible"/>
 
 </android.support.constraint.ConstraintLayout>

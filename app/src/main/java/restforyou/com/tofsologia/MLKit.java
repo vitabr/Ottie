@@ -28,6 +28,7 @@ public class MLKit {
 
     private static MLKit _instance = new MLKit();
     private static final String LOCAL_MODEL_ASSET = "mobilenet_v1_1.0_224_quant.tflite";
+    private static final String HOSTED_MODEL_NAME = "cloud_model_1";
     private static FirebaseModelInterpreter mInterpreter;
 
     private MLKit(){
@@ -40,6 +41,7 @@ public class MLKit {
             manager.registerLocalModelSource(localSource);
             FirebaseModelOptions modelOptions =
                     new FirebaseModelOptions.Builder()
+                            .setCloudModelName(HOSTED_MODEL_NAME)
                             .setLocalModelName("asset")
                             .build();
             mInterpreter = FirebaseModelInterpreter.getInstance(modelOptions);
