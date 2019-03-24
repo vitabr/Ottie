@@ -83,7 +83,7 @@ public class TextRecognitionActivity extends AppCompatActivity {
     }
 
     private void showReadyActivity(){
-        Intent toReadyActivityIntent = new Intent(TextRecognitionActivity.this, ReadyTextActivity.class);
+        Intent toReadyActivityIntent = new Intent(TextRecognitionActivity.this, TextReadyActivity.class);
         startActivity(toReadyActivityIntent);
     }
 

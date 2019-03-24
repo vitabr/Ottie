@@ -11,4 +11,10 @@
     <string name="show_example">Show example</string>
     <string name="ready_text_activity">Ready text activity</string>
     <string name="choose_from_gallery">Choose from gallery</string>
+
+    // TextReadyActivityResources
+    <string name="home">Home</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+
 </resources>
