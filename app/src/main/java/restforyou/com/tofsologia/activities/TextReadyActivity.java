@@ -6,7 +6,7 @@ import android.util.Log;
 
 import restforyou.com.tofsologia.R;
 
-public class ReadyTextActivity extends AppCompatActivity {
+public class TextReadyActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
