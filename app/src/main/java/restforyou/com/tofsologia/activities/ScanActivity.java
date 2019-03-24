@@ -1,4 +1,4 @@
-package restforyou.com.tofsologia.views;
+package restforyou.com.tofsologia.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -15,9 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -133,8 +131,8 @@ public class ScanActivity extends AppCompatActivity implements Constants {
         logIt(imageUri + " ");
         if (imageUri != null) {
             logIt(imageUri + " ");
-            //Intent toTextRecActivityIntent = new Intent(ScanActivity.this, TextRecognitionActivity.class);
-            Intent toTextRecActivityIntent = new Intent(ScanActivity.this, WorkingExampleActivity.class);
+            Intent toTextRecActivityIntent = new Intent(ScanActivity.this, TextRecognitionActivity.class);
+            //Intent toTextRecActivityIntent = new Intent(ScanActivity.this, WorkingExampleActivity.class);
             //toTextRecActivityIntent.setAction(Constants.RECEIVED_IMAGE);
             toTextRecActivityIntent.putExtra(Constants.IMAGE_URL, imageUri.toString());
             startActivity(toTextRecActivityIntent);

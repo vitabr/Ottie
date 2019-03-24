@@ -1,4 +1,4 @@
-package restforyou.com.tofsologia.views;
+package restforyou.com.tofsologia.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

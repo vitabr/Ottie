@@ -11,7 +11,7 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-package restforyou.com.tofsologia;
+package restforyou.com.tofsologia.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -23,8 +23,6 @@ import android.view.View;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import restforyou.com.tofsologia.utils.TouchImageView;
 
 /**
  * A view which renders a series of custom graphics to be overlayed on top of an associated preview

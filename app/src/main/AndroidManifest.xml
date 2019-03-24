@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
-        <activity android:name=".views.SplashActivity"
+        <activity android:name=".activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -24,15 +24,15 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".views.WorkingExampleActivity"
+        <activity android:name=".activities.WorkingExampleActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".views.LoginActivity"
+        <activity android:name=".activities.LoginActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".views.ScanActivity"
+        <activity android:name=".activities.ScanActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".views.TextRecognitionActivity"
+        <activity android:name=".activities.TextRecognitionActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".views.ReadyTextActivity"
+        <activity android:name=".activities.ReadyTextActivity"
             android:screenOrientation="portrait"/>
 
         <meta-data

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package restforyou.com.tofsologia;
+package restforyou.com.tofsologia.views;
 
 import android.graphics.Canvas;
 import android.graphics.Color;

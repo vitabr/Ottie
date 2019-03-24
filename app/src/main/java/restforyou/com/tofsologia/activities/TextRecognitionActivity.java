@@ -1,4 +1,4 @@
-package restforyou.com.tofsologia.views;
+package restforyou.com.tofsologia.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,7 +18,6 @@ import butterknife.ButterKnife;
 import restforyou.com.tofsologia.R;
 
 import static restforyou.com.tofsologia.utils.Constants.IMAGE_URL;
-import static restforyou.com.tofsologia.utils.Constants.RECEIVED_IMAGE;
 
 public class TextRecognitionActivity extends AppCompatActivity {
 
@@ -39,29 +38,24 @@ public class TextRecognitionActivity extends AppCompatActivity {
 
 
         Intent receivedIntent = getIntent();
-        if (receivedIntent.getAction() == RECEIVED_IMAGE && receivedIntent.getAction() != null ){
-            //String imageUri = receivedIntent.getStringExtra(IMAGE_URL);
-
-            Uri imageUri = Uri.parse(receivedIntent.getStringExtra(IMAGE_URL));
-
-            //Bitmap selectedImage = BitmapFactory.decodeFile("file://" + receivedIntent.getStringExtra(IMAGE_URL).replace("content://", ""));
-            //imageViewForRecognition.setImageBitmap(selectedImage);
-            imageViewForRecognition.setImageURI(imageUri);
+        //if (receivedIntent.getAction() == RECEIVED_IMAGE && receivedIntent.getAction() != null ){
+            String imageUriString = receivedIntent.getStringExtra(IMAGE_URL);
+            Uri imageUri = Uri.parse(imageUriString);
 
             logIt("action " + receivedIntent.getAction()+ " url " + receivedIntent.getStringExtra(IMAGE_URL));
 
             final InputStream imageStream;
-           // try {
-                //imageStream = getContentResolver().openInputStream(imageUri);
-                //final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                //imageViewForRecognition.setImageBitmap(selectedImage);
+            try {
+                imageStream = getContentResolver().openInputStream(imageUri);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                imageViewForRecognition.setImageBitmap(selectedImage);
 
-            //} catch (FileNotFoundException e) {
-            //    e.printStackTrace();
-            //}
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
 
 
-        }
+        //}
     }
 
     private void setInitialUiElements(){

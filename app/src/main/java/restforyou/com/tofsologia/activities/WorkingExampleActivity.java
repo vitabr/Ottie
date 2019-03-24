@@ -1,4 +1,4 @@
-package restforyou.com.tofsologia.views;
+package restforyou.com.tofsologia.activities;
 
 import android.app.Activity;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,9 +45,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import restforyou.com.tofsologia.GraphicOverlay;
+import restforyou.com.tofsologia.views.GraphicOverlay;
 import restforyou.com.tofsologia.R;
-import restforyou.com.tofsologia.TextGraphic;
+import restforyou.com.tofsologia.views.TextGraphic;
 
 public class WorkingExampleActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 

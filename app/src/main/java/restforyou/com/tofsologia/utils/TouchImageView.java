@@ -149,6 +149,7 @@ public class TouchImageView extends android.support.v7.widget.AppCompatImageView
         super.setImageBitmap(bm);
         savePreviousImageValues();
         fitImageToView();
+        setZoom(1);
     }
 
     @Override

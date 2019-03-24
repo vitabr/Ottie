@@ -4,20 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.WorkingExampleActivity">
+    tools:context=".activities.WorkingExampleActivity">
 
     <restforyou.com.tofsologia.utils.TouchImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
         app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:contentDescription="@string/select_image_for_text_recognition" />
 
-    <restforyou.com.tofsologia.GraphicOverlay
+    <restforyou.com.tofsologia.views.GraphicOverlay
         android:id="@+id/graphic_overlay"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

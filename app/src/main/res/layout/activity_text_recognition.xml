@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.TextRecognitionActivity"
+    tools:context=".activities.TextRecognitionActivity"
     android:theme="@style/Theme.AppCompat.NoActionBar">
 
 
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <restforyou.com.tofsologia.GraphicOverlay
+    <restforyou.com.tofsologia.views.GraphicOverlay
         android:id="@+id/go_image_for_recognition"
         android:layout_width="match_parent"
         android:layout_height="400dp"
