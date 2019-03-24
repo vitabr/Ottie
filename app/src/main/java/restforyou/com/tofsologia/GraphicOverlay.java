@@ -17,10 +17,14 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.hardware.camera2.CameraCharacteristics;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import restforyou.com.tofsologia.utils.TouchImageView;
 
 /**
  * A view which renders a series of custom graphics to be overlayed on top of an associated preview
@@ -59,6 +63,7 @@ public class GraphicOverlay extends View {
         private GraphicOverlay overlay;
 
         public Graphic(GraphicOverlay overlay) {
+
             this.overlay = overlay;
         }
 
@@ -123,6 +128,13 @@ public class GraphicOverlay extends View {
 
     public GraphicOverlay(Context context, AttributeSet attrs) {
         super(context, attrs);
+        super.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.e("GraphicsOverlay","onTouch: " + event);
+                return false;
+            }
+        });
     }
 
     /**

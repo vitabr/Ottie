@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -146,6 +148,19 @@ public class WorkingExampleActivity extends AppCompatActivity implements Adapter
                 }
             }
         }
+
+        // Create bitmap from overlay view
+        Bitmap textBitmap = Bitmap.createBitmap(mGraphicOverlay.getMeasuredWidth(), mGraphicOverlay.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+        Canvas textCanvas = new Canvas(textBitmap);
+        mGraphicOverlay.draw(textCanvas);
+
+        // Draw text bitmap over original image bitmap
+        Canvas resultCanvas = new Canvas(mSelectedImage);
+        resultCanvas.drawBitmap(mSelectedImage,0,0, null);
+        resultCanvas.drawBitmap(textBitmap, 0,0, null);
+
+        mImageView.setImageBitmap(mSelectedImage);
+
     }
 
     private void initCustomModel() {
@@ -259,11 +274,11 @@ public class WorkingExampleActivity extends AppCompatActivity implements Adapter
         mGraphicOverlay.clear();
         switch (position) {
             case 0:
-                mSelectedImage = getBitmapFromAsset(this, "text2.jpg");
+                mSelectedImage = getBitmapFromAsset(this, "09.jpg");
                 break;
             case 1:
                 // Whatever you want to happen when the thrid item gets selected
-                mSelectedImage = getBitmapFromAsset(this, "09.jpg");
+                mSelectedImage = getBitmapFromAsset(this, "text2.jpg");
                 break;
             case 2:
                 // Whatever you want to happen when the thrid item gets selected

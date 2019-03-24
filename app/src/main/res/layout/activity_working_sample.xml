@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".views.WorkingExampleActivity">
 
-    <ImageView
+    <restforyou.com.tofsologia.utils.TouchImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitStart"
+        android:scaleType="fitXY"
         app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -25,7 +25,9 @@
         app:layout_constraintBottom_toBottomOf="@id/image_view"
         app:layout_constraintLeft_toLeftOf="@id/image_view"
         app:layout_constraintRight_toRightOf="@id/image_view"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:visibility="invisible"/>
+
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="match_parent"
