@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 
@@ -23,12 +24,17 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import restforyou.com.tofsologia.App;
 import restforyou.com.tofsologia.MLKit;
 import restforyou.com.tofsologia.R;
+import restforyou.com.tofsologia.model.DbManager;
+import restforyou.com.tofsologia.model.Record;
 import restforyou.com.tofsologia.views.GraphicOverlay;
 import restforyou.com.tofsologia.views.TextGraphic;
 
+import static restforyou.com.tofsologia.utils.Constants.CURRENT_RECORD_ID;
 import static restforyou.com.tofsologia.utils.Constants.IMAGE_URL;
+import static restforyou.com.tofsologia.utils.Constants.RECORD_EXIST;
 
 public class TextRecognitionActivity extends AppCompatActivity {
 
@@ -45,6 +51,8 @@ public class TextRecognitionActivity extends AppCompatActivity {
 
     private Bitmap mBitmapForRecognition;
     private String mResultText;
+    private String imageUriString;
+    private Record mRecord;
 
 
     @Override
@@ -58,13 +66,8 @@ public class TextRecognitionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_text_recognition);
         ButterKnife.bind(this);
 
-        mTextReady.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent toTextReadyActivity = new Intent(TextRecognitionActivity.this, TextReadyActivity.class);
-                startActivity(toTextReadyActivity);
-            }
-        });
+
+
 
        handleIntent();
     }
@@ -72,7 +75,7 @@ public class TextRecognitionActivity extends AppCompatActivity {
 
     private void handleIntent(){
         Intent receivedIntent = getIntent();
-        String imageUriString = receivedIntent.getStringExtra(IMAGE_URL);
+        imageUriString = receivedIntent.getStringExtra(IMAGE_URL);
         Uri imageUri = Uri.parse(imageUriString);
 
         logIt("action " + receivedIntent.getAction()+ " url " + receivedIntent.getStringExtra(IMAGE_URL));
@@ -147,11 +150,53 @@ public class TextRecognitionActivity extends AppCompatActivity {
         mImageForRecognition.setImageBitmap(mBitmapForRecognition);
         mTextRecognized.setText(stringBuffer.toString());
         editTextRecognized.setText(stringBuffer.toString());
+        logIt(stringBuffer.toString());
+        createRecord(stringBuffer.toString());
     }
 
     private void logIt(String message){
         String TAG = this.getClass().getSimpleName();
         Log.e(TAG, message);
+    }
+
+    private void addRecordToDb(Record record){
+        DbManager.getInstance().addRecord(record, new DbManager.onRecordAdded() {
+            @Override
+            public void onRecordAdded() {
+                //todo result returned to main thread??? already
+                App.getAppMainExecutor().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mRecord != null){
+                            mTextReady.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    logIt("added to db ");
+                                    Intent toTextReadyActivity = new Intent(TextRecognitionActivity.this, TextReadyActivity.class);
+                                    toTextReadyActivity.setAction(RECORD_EXIST);
+                                    toTextReadyActivity.putExtra(CURRENT_RECORD_ID, mRecord.getId());
+                                    startActivity(toTextReadyActivity);
+                                }
+                            });
+                        } else {
+                            Toast.makeText(TextRecognitionActivity.this, "Please wait", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+            }
+        });
+    }
+
+    private void createRecord(String description){
+        mRecord = new Record();
+        mRecord.setDescription(description);
+        //here we don't have file name yet and uri yet
+        mRecord.setFileName("");
+        mRecord.setPhotoURI(imageUriString);
+        mRecord.setTextFileURI("");
+        addRecordToDb(mRecord);
+        logIt(" id" + mRecord.getId());
     }
 
 }

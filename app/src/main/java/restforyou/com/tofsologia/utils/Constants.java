@@ -7,4 +7,6 @@ public interface Constants {
     String RECEIVED_IMAGE = "RECEIVED_IMAGE";
     String IMAGE_URL = "IMAGE_URL";
     String DATABASE = "DATABASE";
+    String RECORD_EXIST = "RECORD_EXIST";
+    String CURRENT_RECORD_ID = "CURRENT_RECORD_ID";
 }

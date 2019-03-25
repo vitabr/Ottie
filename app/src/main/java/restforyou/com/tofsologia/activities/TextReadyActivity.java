@@ -11,32 +11,64 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import restforyou.com.tofsologia.App;
 import restforyou.com.tofsologia.R;
+import restforyou.com.tofsologia.model.DbManager;
 import restforyou.com.tofsologia.model.Record;
+
+import static restforyou.com.tofsologia.utils.Constants.CURRENT_RECORD_ID;
+import static restforyou.com.tofsologia.utils.Constants.RECORD_EXIST;
 
 public class TextReadyActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView content;
-    private EditText contentEditable;
-    private Record record;
+    @BindView(R.id.tv_content)
+    TextView content;
+    @BindView(R.id.content_editable)
+    EditText contentEditable;
+    @BindView(R.id.tv_file_name)
+    TextView fileName;
+
+    private Record mRecord;
     private boolean isEditMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ready_text);
+        ButterKnife.bind(this);
         getRecord();
         initViews();
 
     }
 
     private void getRecord() {
-        record = new Record(
-                -1,
-                "Text.txt",
-                getResources().getString(R.string.text),
-                "photo.png",
-                "text.txt");
+//        record = new Record(
+//                -1,
+//                "Text.txt",
+//                getResources().getString(R.string.text),
+//                "photo.png",
+//                "text.txt");
+
+        Intent fromTextRecognition = getIntent();
+        if (fromTextRecognition.getAction() == RECORD_EXIST){
+            int id = fromTextRecognition.getIntExtra(CURRENT_RECORD_ID, -1);
+            Log.e("xxx", id+" ");
+            //int id = 1;
+            //mRecord
+//            DbManager.getInstance().getRecordById(id, new DbManager.OnRecordReceived() {
+//                @Override
+//                public void onRecordReceived(Record record) {
+//                    mRecord = record;
+//                    content.setText(mRecord.getDescription());
+//                    fileName.setText(mRecord.getFileName());
+//                }
+//            });
+
+        }
     }
 
     private void initViews() {
@@ -44,10 +76,8 @@ public class TextReadyActivity extends AppCompatActivity implements View.OnClick
         findViewById(R.id.btn_edit).setOnClickListener(this);
         findViewById(R.id.btn_save).setOnClickListener(this);
 
-        content = findViewById(R.id.tv_content);
-        contentEditable = findViewById(R.id.content_editable);
-
-        content.setText(record.getDescription());
+        //content.setText(record.getDescription());
+        //fileName.setText(record.getFileName());
     }
 
     @Override
@@ -60,7 +90,8 @@ public class TextReadyActivity extends AppCompatActivity implements View.OnClick
                 editContent();
                 break;
             case R.id.btn_save:
-                saveContent();
+                //saveContent();
+                getAllRecords();
                 break;
         }
     }
@@ -76,6 +107,17 @@ public class TextReadyActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    private void getAllRecords(){
+        DbManager.getInstance().getAllRecords(new DbManager.onRecordsReceived() {
+            @Override
+            public void onRecorsReceived(List<Record> records) {
+                for (Record record:records){
+                    Log.e("xxx", "records :" + record);
+                }
+            }
+        });
+    }
+
     private void editContent() {
         if (!isEditMode) {
             content.setVisibility(View.INVISIBLE);
@@ -86,7 +128,7 @@ public class TextReadyActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void saveToRecord() {
-        record.setDescription(content.getText().toString());
+        mRecord.setDescription(content.getText().toString());
     }
 
     private void returnToMainActivity() {
