@@ -11,4 +11,15 @@
     <string name="show_example">Show example</string>
     <string name="ready_text_activity">Ready text activity</string>
     <string name="choose_from_gallery">Choose from gallery</string>
+
+    // TextReadyActivityResources
+    <string name="home">Home</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
+    <string name="sample_text">This is a text created with love to test what it looks like.</string>
+    <string name="text">They’re not growing beards; they just don’t shave anymore. Actually,
+        that’s not quite it — they do shave, but only once a week. It’s enough to prevent beards,
+        but not enough to look un-unkempt except on that one, special day. It’s like the maid comes
+        once a week and cleans up their face on the way out..</string>
+    <string name="empty" />
 </resources>
