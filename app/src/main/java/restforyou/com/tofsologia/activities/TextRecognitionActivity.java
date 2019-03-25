@@ -61,7 +61,8 @@ public class TextRecognitionActivity extends AppCompatActivity {
         mTextReady.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO save data to DB and go to TextReadyActivity
+                Intent toTextReadyActivity = new Intent(TextRecognitionActivity.this, TextReadyActivity.class);
+                startActivity(toTextReadyActivity);
             }
         });
 

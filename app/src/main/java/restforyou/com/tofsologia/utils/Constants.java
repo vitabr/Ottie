@@ -6,4 +6,5 @@ public interface Constants {
     int REQUEST_CHOOSE_IMAGE = 1;
     String RECEIVED_IMAGE = "RECEIVED_IMAGE";
     String IMAGE_URL = "IMAGE_URL";
+    String DATABASE = "DATABASE";
 }
