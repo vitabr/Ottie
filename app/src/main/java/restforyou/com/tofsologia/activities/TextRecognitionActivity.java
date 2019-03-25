@@ -3,7 +3,9 @@ package restforyou.com.tofsologia.activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,8 +17,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.ml.vision.text.FirebaseVisionText;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,73 +39,109 @@ import static restforyou.com.tofsologia.utils.Constants.RECORD_EXIST;
 
 public class TextRecognitionActivity extends AppCompatActivity {
 
+    @BindView(R.id.tv_recognized_text)
+    TextView mTextRecognized;
     @BindView(R.id.et_recognized_text)
     EditText editTextRecognized;
     @BindView(R.id.iv_image_for_recognition)
-    ImageView imageViewForRecognition;
+    ImageView mImageForRecognition;
+    @BindView(R.id.go_image_for_recognition)
+    GraphicOverlay mGraphicOverlay;
+    @BindView(R.id.btn_text_ready)
+    ImageButton mTextReady;
 
     private Bitmap mBitmapForRecognition;
     private String mResultText;
     private String imageUriString;
     private Record mRecord;
 
-//    @BindView(R.id.go_image_for_recognition)
-//    GraphicOverlay imageForRecognition;
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_recognition);
-        buttonReadyActivity = findViewById(R.id.btn_text_ready);
-
         ButterKnife.bind(this);
-        setListeners();
-        setInitialUiElements();
 
 
 
 
-       handleIntent();
+        handleIntent();
     }
 
-            final InputStream imageStream;
-            try {
-                imageStream = getContentResolver().openInputStream(imageUri);
-                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
-                imageViewForRecognition.setImageBitmap(selectedImage);
 
     private void handleIntent(){
         Intent receivedIntent = getIntent();
         imageUriString = receivedIntent.getStringExtra(IMAGE_URL);
         Uri imageUri = Uri.parse(imageUriString);
 
+        logIt("action " + receivedIntent.getAction()+ " url " + receivedIntent.getStringExtra(IMAGE_URL));
 
-        //}
+        final InputStream imageStream;
+        try {
+            imageStream = getContentResolver().openInputStream(imageUri);
+            mBitmapForRecognition = BitmapFactory.decodeStream(imageStream);
+            mImageForRecognition.setImageBitmap(mBitmapForRecognition);
+            mBitmapForRecognition = mBitmapForRecognition.copy(mBitmapForRecognition.getConfig(), true);
+
+            MLKit.recognize(mBitmapForRecognition, new MLKit.OnRecognizeListener() {
+                @Override
+                public void onSuccess(FirebaseVisionText texts) {
+                    processTextRecognitionResult(texts);
+                }
+
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    e.printStackTrace();
+                }
+            });
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void setInitialUiElements(){
+    private void processTextRecognitionResult(FirebaseVisionText texts){
+        List<FirebaseVisionText.TextBlock> blocks = texts.getTextBlocks();
 
-    }
+        logIt(texts.getText());
 
-    private void setListeners(){
-//        buttonShowExample.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//               showExample();
-//            }
-//        });
-        buttonReadyActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showReadyActivity();
+        if (blocks.size() == 0) {
+            return;
+        }
+
+        mGraphicOverlay.clear();
+        StringBuffer stringBuffer = new StringBuffer();
+        for (int i = 0; i < blocks.size(); i++) {
+            List<FirebaseVisionText.Line> lines = blocks.get(i).getLines();
+            stringBuffer.append(blocks.get(i).getText());
+
+            for (int j = 0; j < lines.size(); j++) {
+                List<FirebaseVisionText.Element> elements = lines.get(j).getElements();
+                stringBuffer.append(lines.get(j).getText());
+
+                for (int k = 0; k < elements.size(); k++) {
+
+                    //stringBuffer.append(elements.get(k).getText());
+                    if(k < elements.size()-1){
+                        //stringBuffer.append(" ");
+                    }
+
+                    GraphicOverlay.Graphic textGraphic = new TextGraphic(mGraphicOverlay, elements.get(k));
+                    mGraphicOverlay.add(textGraphic);
+                }
+                stringBuffer.append("\n");
             }
-        });
-    }
+            stringBuffer.append("\n");
+        }
 
-    private void showExample(){
-        Intent toExampleIntent = new Intent(TextRecognitionActivity.this, WorkingExampleActivity.class);
-        startActivity(toExampleIntent);
-    }
+        // Create bitmap from overlay view
+        Bitmap textBitmap = Bitmap.createBitmap(mBitmapForRecognition.getWidth(), mBitmapForRecognition.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas textCanvas = new Canvas(textBitmap);
+        mGraphicOverlay.draw(textCanvas);
 
         // Draw text bitmap over original image bitmap
         Canvas resultCanvas = new Canvas(mBitmapForRecognition);
@@ -136,7 +177,6 @@ public class TextRecognitionActivity extends AppCompatActivity {
                                     toTextReadyActivity.setAction(RECORD_EXIST);
                                     toTextReadyActivity.putExtra(CURRENT_RECORD_ID, mRecord.getId());
                                     startActivity(toTextReadyActivity);
-                                    finish();
                                 }
                             });
                         } else {
