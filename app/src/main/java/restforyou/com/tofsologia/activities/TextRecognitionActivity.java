@@ -176,6 +176,7 @@ public class TextRecognitionActivity extends AppCompatActivity {
                                     toTextReadyActivity.setAction(RECORD_EXIST);
                                     toTextReadyActivity.putExtra(CURRENT_RECORD_ID, mRecord.getId());
                                     startActivity(toTextReadyActivity);
+                                    finish();
                                 }
                             });
                         } else {
@@ -190,6 +191,8 @@ public class TextRecognitionActivity extends AppCompatActivity {
 
     private void createRecord(String description){
         mRecord = new Record();
+        int id = (int)System.currentTimeMillis()%100000000;
+        mRecord.setId(id);
         mRecord.setDescription(description);
         //here we don't have file name yet and uri yet
         mRecord.setFileName("");

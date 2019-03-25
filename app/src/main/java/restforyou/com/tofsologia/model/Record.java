@@ -7,8 +7,8 @@ import java.io.Serializable;
 
 @Entity(tableName = "records")
 public class Record implements Serializable {
-    @PrimaryKey(autoGenerate = true)
-    public int id;
+    @PrimaryKey
+    private int id;
     private String fileName;
     private String description;
     private String photoURI;
@@ -58,6 +58,10 @@ public class Record implements Serializable {
 
     public void setTextFileURI(String textFileURI) {
         this.textFileURI = textFileURI;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

@@ -57,16 +57,16 @@ public class TextReadyActivity extends AppCompatActivity implements View.OnClick
         if (fromTextRecognition.getAction() == RECORD_EXIST){
             int id = fromTextRecognition.getIntExtra(CURRENT_RECORD_ID, -1);
             Log.e("xxx", id+" ");
-            //int id = 1;
+            ///int id = 1;
             //mRecord
-//            DbManager.getInstance().getRecordById(id, new DbManager.OnRecordReceived() {
-//                @Override
-//                public void onRecordReceived(Record record) {
-//                    mRecord = record;
-//                    content.setText(mRecord.getDescription());
-//                    fileName.setText(mRecord.getFileName());
-//                }
-//            });
+            DbManager.getInstance().getRecordById(id, new DbManager.OnRecordReceived() {
+                @Override
+                public void onRecordReceived(Record record) {
+                    mRecord = record;
+                    content.setText(mRecord.getDescription());
+                    fileName.setText(mRecord.getFileName());
+                }
+            });
 
         }
     }
