@@ -6,8 +6,8 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName = "records")
 public class Record {
 
-    @PrimaryKey(autoGenerate = true)
-    public int id;
+    @PrimaryKey
+    public long id;
     private String fileName;
     private String description;
     private String photoURI;
@@ -31,16 +31,21 @@ public class Record {
         return description;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public int getId() {
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getPhotoURI() {
@@ -57,10 +62,6 @@ public class Record {
 
     public void setTextFileURI(String textFileURI) {
         this.textFileURI = textFileURI;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override

@@ -1,7 +1,5 @@
 package restforyou.com.tofsologia.model;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,24 +23,39 @@ public class DbManager {
         return instance;
     }
 
-    public void addRecord(final Record record, final onRecordAdded recordAddedListener){
+    public void updateRecord(final Record record, final OnResult<Void> recordUpdatedListener){
         App.getAppDBExecutor().execute(new Runnable() {
             @Override
             public void run() {
-                recordsDao.addRecord(record);
+                recordsDao.update(record);
                 App.getAppMainExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
-                        recordAddedListener.onRecordAdded();
+                        if(recordUpdatedListener != null){
+                            recordUpdatedListener.onResult(null);
+                        }
                     }
                 });
             }
         });
-
-
     }
 
-    public void getAllRecords(final onRecordsReceived listener) {
+    public void addRecord(final Record record, final OnResult<Void> recordAddedListener){
+        App.getAppDBExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                recordsDao.add(record);
+                App.getAppMainExecutor().execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        recordAddedListener.onResult(null);
+                    }
+                });
+            }
+        });
+    }
+
+    public void getAllRecords(final OnResult<List<Record>> listener) {
         App.getAppDBExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -51,7 +64,7 @@ public class DbManager {
                 App.getAppMainExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
-                        listener.onRecorsReceived(activeAlarmsList);
+                        listener.onResult(activeAlarmsList);
                     }
                 });
 
@@ -59,7 +72,7 @@ public class DbManager {
         });
     }
 
-    public void getRecordById(final int id, final OnRecordReceived onRecordsReceivedListener){
+    public void getRecordById(final long id, final OnResult<Record> onRecordsReceivedListener){
         App.getAppDBExecutor().execute(new Runnable() {
             @Override
             public void run() {
@@ -67,28 +80,16 @@ public class DbManager {
                 App.getAppMainExecutor().execute(new Runnable() {
                     @Override
                     public void run() {
-                        ///Log.e("xxx", record.toString());
-                        onRecordsReceivedListener.onRecordReceived(record);
+                        onRecordsReceivedListener.onResult(record);
                     }
                 });
             }
         });
-
     }
 
-    public interface onRecordAdded {
-        void onRecordAdded();
+    public interface OnResult<T>{
+        void onResult(T result);
     }
-
-    public interface onRecordsReceived {
-        void onRecorsReceived(List<Record> records);
-    }
-
-    public interface OnRecordReceived {
-        void onRecordReceived(Record record);
-    }
-
-
 
 }
 

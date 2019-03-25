@@ -55,13 +55,11 @@ public class TextReadyActivity extends AppCompatActivity implements View.OnClick
 
         Intent fromTextRecognition = getIntent();
         if (fromTextRecognition.getAction() == RECORD_EXIST){
-            int id = fromTextRecognition.getIntExtra(CURRENT_RECORD_ID, -1);
+            long id = fromTextRecognition.getLongExtra(CURRENT_RECORD_ID, -1);
             Log.e("xxx", id+" ");
-            ///int id = 1;
-            //mRecord
-            DbManager.getInstance().getRecordById(id, new DbManager.OnRecordReceived() {
+            DbManager.getInstance().getRecordById(id, new DbManager.OnResult<Record>() {
                 @Override
-                public void onRecordReceived(Record record) {
+                public void onResult(Record record) {
                     mRecord = record;
                     content.setText(mRecord.getDescription());
                     fileName.setText(mRecord.getFileName());
@@ -90,8 +88,7 @@ public class TextReadyActivity extends AppCompatActivity implements View.OnClick
                 editContent();
                 break;
             case R.id.btn_save:
-                //saveContent();
-                getAllRecords();
+                saveContent();
                 break;
         }
     }
@@ -108,10 +105,10 @@ public class TextReadyActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void getAllRecords(){
-        DbManager.getInstance().getAllRecords(new DbManager.onRecordsReceived() {
+        DbManager.getInstance().getAllRecords(new DbManager.OnResult<List<Record>>() {
             @Override
-            public void onRecorsReceived(List<Record> records) {
-                for (Record record:records){
+            public void onResult(List<Record> result) {
+                for (Record record : result){
                     Log.e("xxx", "records :" + record);
                 }
             }
@@ -129,6 +126,12 @@ public class TextReadyActivity extends AppCompatActivity implements View.OnClick
 
     private void saveToRecord() {
         mRecord.setDescription(content.getText().toString());
+        DbManager.getInstance().updateRecord(mRecord, new DbManager.OnResult<Void>(){
+            @Override
+            public void onResult(Void result) {
+                getAllRecords();
+            }
+        });
     }
 
     private void returnToMainActivity() {

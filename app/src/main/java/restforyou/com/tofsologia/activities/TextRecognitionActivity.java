@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -25,7 +24,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import restforyou.com.tofsologia.App;
 import restforyou.com.tofsologia.MLKit;
 import restforyou.com.tofsologia.R;
 import restforyou.com.tofsologia.model.DbManager;
@@ -160,45 +158,38 @@ public class TextRecognitionActivity extends AppCompatActivity {
         Log.e(TAG, message);
     }
 
-    private void addRecordToDb(Record record){
-        DbManager.getInstance().addRecord(record, new DbManager.onRecordAdded() {
+    private void saveRecordAndGoToTextReadyActivity(Record record){
+        DbManager.getInstance().addRecord(record, new DbManager.OnResult<Void>() {
             @Override
-            public void onRecordAdded() {
-                //todo result returned to main thread??? already
-                App.getAppMainExecutor().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (mRecord != null){
-                            mTextReady.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    logIt("added to db ");
-                                    Intent toTextReadyActivity = new Intent(TextRecognitionActivity.this, TextReadyActivity.class);
-                                    toTextReadyActivity.setAction(RECORD_EXIST);
-                                    toTextReadyActivity.putExtra(CURRENT_RECORD_ID, mRecord.getId());
-                                    startActivity(toTextReadyActivity);
-                                }
-                            });
-                        } else {
-                            Toast.makeText(TextRecognitionActivity.this, "Please wait", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+            public void onResult(Void result) {
 
+                if (mRecord != null){
+                    mTextReady.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            logIt("added to db ");
+                            Intent toTextReadyActivity = new Intent(TextRecognitionActivity.this, TextReadyActivity.class);
+                            toTextReadyActivity.setAction(RECORD_EXIST);
+                            toTextReadyActivity.putExtra(CURRENT_RECORD_ID, mRecord.getId());
+                            startActivity(toTextReadyActivity);
+                        }
+                    });
+                } else {
+                    Toast.makeText(TextRecognitionActivity.this, "Please wait", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
 
     private void createRecord(String description){
         mRecord = new Record();
-        int id = (int)System.currentTimeMillis()%100000000;
-        mRecord.setId(id);
+        mRecord.setId(System.currentTimeMillis());
         mRecord.setDescription(description);
         //here we don't have file name yet and uri yet
         mRecord.setFileName("");
         mRecord.setPhotoURI(imageUriString);
         mRecord.setTextFileURI("");
-        addRecordToDb(mRecord);
+        saveRecordAndGoToTextReadyActivity(mRecord);
         logIt(" id" + mRecord.getId());
     }
 
