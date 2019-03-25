@@ -29,7 +29,7 @@ public class TextGraphic extends GraphicOverlay.Graphic {
 
     private static final String TAG = "TextGraphic";
     private static final int TEXT_COLOR = Color.RED;
-    private static final float TEXT_SIZE = 54.0f;
+    private static final float TEXT_SIZE = 25.0f;
     private static final float STROKE_WIDTH = 4.0f;
 
     private final Paint rectPaint;
@@ -68,6 +68,6 @@ public class TextGraphic extends GraphicOverlay.Graphic {
         canvas.drawRect(rect, rectPaint);
 
         // Renders the text at the bottom of the box.
-        //canvas.drawText(element.getText(), rect.left, rect.bottom, textPaint);
+        canvas.drawText(element.getText(), rect.left, rect.bottom, textPaint);
     }
 }

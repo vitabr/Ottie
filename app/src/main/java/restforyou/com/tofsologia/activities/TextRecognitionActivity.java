@@ -20,6 +20,8 @@ import com.google.firebase.ml.vision.text.FirebaseVisionText;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -113,11 +115,21 @@ public class TextRecognitionActivity extends AppCompatActivity {
 
         mGraphicOverlay.clear();
         StringBuffer stringBuffer = new StringBuffer();
+
         for (int i = 0; i < blocks.size(); i++) {
+
+            logIt("*************** BLOCK ***********************");
             List<FirebaseVisionText.Line> lines = blocks.get(i).getLines();
-            stringBuffer.append(blocks.get(i).getText());
+            //stringBuffer.append(blocks.get(i).getText());
+            Collections.sort(lines, new Comparator<FirebaseVisionText.Line>(){
+                @Override
+                public int compare(FirebaseVisionText.Line line1, FirebaseVisionText.Line line2) {
+                    return line1.getBoundingBox().top - line2.getBoundingBox().top;
+                }
+            });
 
             for (int j = 0; j < lines.size(); j++) {
+                logIt(lines.get(j).getText());
                 List<FirebaseVisionText.Element> elements = lines.get(j).getElements();
                 stringBuffer.append(lines.get(j).getText());
 

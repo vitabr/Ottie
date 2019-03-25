@@ -14,22 +14,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:src="@drawable/scan_activity_done"
-        app:layout_constraintBottom_toTopOf="@+id/et_recognized_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/iv_image_for_recognition" />
+        app:layout_constraintStart_toStartOf="@+id/iv_image_for_recognition"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <restforyou.com.tofsologia.utils.TouchImageView
         android:id="@+id/iv_image_for_recognition"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:scaleType="centerInside"
         app:layout_constraintBottom_toTopOf="@+id/et_recognized_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_text_ready" />
 
     <restforyou.com.tofsologia.views.GraphicOverlay
         android:id="@+id/go_image_for_recognition"
