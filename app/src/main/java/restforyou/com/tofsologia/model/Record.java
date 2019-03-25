@@ -1,10 +1,15 @@
 package restforyou.com.tofsologia.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
+@Entity
 public class Record {
 
+    @PrimaryKey
+    final private int id;
     private String fileName;
     private String description;
-    final private int id;
     final private String photoURI;
     final private String textFileURI;
 
@@ -43,4 +48,6 @@ public class Record {
     public String getTextFileURI() {
         return textFileURI;
     }
+
+
 }

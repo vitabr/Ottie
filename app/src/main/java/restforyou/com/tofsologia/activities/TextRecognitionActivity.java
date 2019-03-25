@@ -7,7 +7,10 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import java.io.FileNotFoundException;
@@ -25,6 +28,9 @@ public class TextRecognitionActivity extends AppCompatActivity {
     EditText editTextRecognized;
     @BindView(R.id.iv_image_for_recognition)
     ImageView imageViewForRecognition;
+
+    ImageButton buttonReadyActivity;
+
 //    @BindView(R.id.go_image_for_recognition)
 //    GraphicOverlay imageForRecognition;
 
@@ -32,10 +38,11 @@ public class TextRecognitionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_text_recognition);
+        buttonReadyActivity = findViewById(R.id.btn_text_ready);
+
         ButterKnife.bind(this);
         setListeners();
         setInitialUiElements();
-
 
         Intent receivedIntent = getIntent();
         //if (receivedIntent.getAction() == RECEIVED_IMAGE && receivedIntent.getAction() != null ){
@@ -69,12 +76,12 @@ public class TextRecognitionActivity extends AppCompatActivity {
 //               showExample();
 //            }
 //        });
-//        buttonReadyActivity.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                showReadyActivity();
-//            }
-//        });
+        buttonReadyActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showReadyActivity();
+            }
+        });
     }
 
     private void showExample(){

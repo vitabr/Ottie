@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
-        <activity android:name=".activities.TextReadyActivity"
+        <activity android:name=".activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -32,7 +32,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activities.TextRecognitionActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activities.SplashActivity"
+        <activity android:name=".activities.TextReadyActivity"
             android:screenOrientation="portrait"/>
 
         <meta-data
