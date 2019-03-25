@@ -3,16 +3,15 @@ package restforyou.com.tofsologia.model;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
-import java.io.Serializable;
+@Entity
+public class Record {
 
-@Entity(tableName = "records")
-public class Record implements Serializable {
     @PrimaryKey
-    private int id;
+    final private int id;
     private String fileName;
     private String description;
-    private String photoURI;
-    private String textFileURI;
+    final private String photoURI;
+    final private String textFileURI;
 
 //    public Record(int id, String fileName, String description, String photoURI, String textFileURI) {
 //        this.id = id;
@@ -56,16 +55,5 @@ public class Record implements Serializable {
         return textFileURI;
     }
 
-    public void setTextFileURI(String textFileURI) {
-        this.textFileURI = textFileURI;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "id "+ id + " description " +description;
-    }
 }
