@@ -1,18 +1,12 @@
 package restforyou.com.tofsologia.model;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+public class Record {
 
-import java.io.Serializable;
-
-@Entity(tableName = "rooms")
-public class Record implements Serializable {
-    @PrimaryKey(autoGenerate = true)
-    public int id;
     private String fileName;
     private String description;
-    private String photoURI;
-    private String textFileURI;
+    final private int id;
+    final private String photoURI;
+    final private String textFileURI;
 
     public Record(int id, String fileName, String description, String photoURI, String textFileURI) {
         this.id = id;

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="restforyou.com.tofsologia">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
-        <activity android:name=".activities.SplashActivity"
+        <activity android:name=".activities.TextReadyActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -33,7 +32,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activities.TextRecognitionActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activities.TextReadyActivity"
+        <activity android:name=".activities.SplashActivity"
             android:screenOrientation="portrait"/>
 
         <meta-data
@@ -47,7 +46,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"></meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
 
     </application>
