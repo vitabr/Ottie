@@ -22,4 +22,6 @@
         but not enough to look un-unkempt except on that one, special day. It’s like the maid comes
         once a week and cleans up their face on the way out..</string>
     <string name="empty" />
+    <string name="title">Title</string>
+    <string name="content">Content</string>
 </resources>

@@ -3,41 +3,37 @@ package restforyou.com.tofsologia.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.design.button.MaterialButton;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import restforyou.com.tofsologia.R;
+import restforyou.com.tofsologia.model.Record;
 import restforyou.com.tofsologia.utils.Constants;
 import restforyou.com.tofsologia.utils.photo.PhotoUtils;
 
-public class ScanActivity extends AppCompatActivity implements Constants {
+public class ScanActivity extends AppCompatActivity implements Constants, AdapterCallback {
 
 
     @BindView(R.id.btn_make_picture)
     Button buttonMakePicture;
-    @BindView(R.id.btn_choose_from_galery)
-    Button buttonChoosefromGalery;
-    @BindView(R.id.img_temporary_picture)
-    ImageView imageViewTempPhoto;
-    @BindView(R.id.floatingActionButton)
-    MaterialButton materialButton;
-    @BindView(R.id.tv_empty_text)
-    TextView textViewEmptyText;
-    @BindView(R.id.img_ready_photo)
-    ImageView imageViewReadyImg;
+    @BindView(R.id.btn_choose_from_gallery)
+    Button buttonChooseFromGallery;
+    @BindView(R.id.recycler)
+    RecyclerView recycler;
 
     private File capturedPhotoFile = null;
 
@@ -48,11 +44,27 @@ public class ScanActivity extends AppCompatActivity implements Constants {
         ButterKnife.bind(this);
         setListeners();
         setInitialUiElements();
+
     }
 
 
     private void setInitialUiElements() {
 
+        recycler.setLayoutManager(new GridLayoutManager(this, 2));
+        recycler.setAdapter(new HistoryAdapter(getRecords(), this));
+
+    }
+
+    private List<Record> getRecords() {
+
+        // mock
+        List<Record> records = new ArrayList<>();
+        Record record = new Record();
+        record.setId(-1);
+        record.setDescription(getResources().getString(R.string.text));
+        record.setFileName("FileName");
+        for (int i = 0; i < 10; i++) records.add(record);
+        return records;
 
     }
 
@@ -64,7 +76,7 @@ public class ScanActivity extends AppCompatActivity implements Constants {
             }
         });
 
-        buttonChoosefromGalery.setOnClickListener(new View.OnClickListener() {
+        buttonChooseFromGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -97,7 +109,6 @@ public class ScanActivity extends AppCompatActivity implements Constants {
             }
         }
     }
-
 
 
     private void logIt(String message) {
@@ -139,6 +150,11 @@ public class ScanActivity extends AppCompatActivity implements Constants {
         }
     }
 
+    @Override
+    public void onItemClick(Record record, int position) {
+        Log.d("TAG", "onItemClick: " + position);
+    }
+
     //part for text recognition activity
 //    private void showPrewiew(Bitmap bitmap) {
 //        materialButton.setText("Recognize");
@@ -148,7 +164,6 @@ public class ScanActivity extends AppCompatActivity implements Constants {
 //        imageViewReadyImg.setVisibility(View.VISIBLE);
 //        imageViewReadyImg.setImageBitmap(bitmap);
 //    }
-
 
 
 }
