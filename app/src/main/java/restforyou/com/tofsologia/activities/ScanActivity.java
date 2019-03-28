@@ -150,7 +150,8 @@ public class ScanActivity extends AppCompatActivity implements Constants, Adapte
         logIt(imageUri + " ");
         if (imageUri != null) {
             logIt(imageUri + " ");
-            Intent toTextRecActivityIntent = new Intent(ScanActivity.this, TextRecognitionActivity.class);
+            Intent toTextRecActivityIntent = new Intent(ScanActivity.this, PlayActivity.class);
+            //Intent toTextRecActivityIntent = new Intent(ScanActivity.this, TextRecognitionActivity.class);
             //Intent toTextRecActivityIntent = new Intent(ScanActivity.this, WorkingExampleActivity.class);
             //toTextRecActivityIntent.setAction(Constants.RECEIVED_IMAGE);
             toTextRecActivityIntent.putExtra(Constants.IMAGE_URL, imageUri.toString());
