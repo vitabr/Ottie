@@ -7,12 +7,11 @@ import android.net.Uri;
 public class AudioManager implements IAudioManager {
 
     private final Context context;
-     private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer;
 
     public AudioManager(Context context) {
         this.context = context;
         mediaPlayer = new MediaPlayer();
-
 
     }
 
@@ -21,9 +20,11 @@ public class AudioManager implements IAudioManager {
         mediaPlayer = MediaPlayer.create(context, file);
     }
 
+
     @Override
     public void stop() {
-        if (mediaPlayer  != null)
-        mediaPlayer.stop();
+        if (mediaPlayer  != null) {
+            mediaPlayer.stop();
+        }
     }
 }

@@ -1,7 +1,9 @@
 package restforyou.com.tofsologia.activities;
 
+import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +19,7 @@ import java.io.IOException;
 
 import restforyou.com.tofsologia.R;
 import restforyou.com.tofsologia.utils.Constants;
+import restforyou.com.tofsologia.utils.audimanager.AudioManager;
 import restforyou.com.tofsologia.utils.photo.PhotoUtils;
 
 public class PlayActivity extends AppCompatActivity implements Constants {
@@ -36,6 +39,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
             //todo
         }else{
             //todo
+            playAssetSound(this,"hello_kids.wav");
         }
 
     }
@@ -96,6 +100,22 @@ public class PlayActivity extends AppCompatActivity implements Constants {
 
     public void hideNegativeView(View v){
         findViewById(R.id.view_negative).setVisibility(View.GONE);
+    }
+    public static void playAssetSound(Context context, String soundFileName) {
+        try {
+            MediaPlayer mediaPlayer = new MediaPlayer();
+
+            AssetFileDescriptor descriptor = context.getAssets().openFd(soundFileName);
+            mediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
+            descriptor.close();
+
+            mediaPlayer.prepare();
+            mediaPlayer.setVolume(1f, 1f);
+            mediaPlayer.setLooping(false);
+            mediaPlayer.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void logIt(String message){
