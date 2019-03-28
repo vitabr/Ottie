@@ -6,10 +6,13 @@ import android.media.MediaPlayer;
 
 import java.util.List;
 
-public class AudioManager implements IAudioManager {
+public class AudioManager implements IAudioManager, MediaPlayer.OnCompletionListener {
 
     private Context context;
     private MediaPlayer mediaPlayer;
+    private int currentFile = 0;
+    private List<String> list;
+
 
     public AudioManager(Context context) {
         this.context = context;
@@ -18,14 +21,18 @@ public class AudioManager implements IAudioManager {
 
     @Override
     public void play(List<String> list) {
-        for (String s : list) {
-            playFile(s);
+        this.list = list;
+        if (currentFile < list.size()) {
+            playFile(list.get(currentFile));
+            currentFile++;
         }
     }
 
     private void playFile(String soundFileName) {
         try {
             AssetFileDescriptor descriptor = context.getAssets().openFd(soundFileName);
+            mediaPlayer.reset();
+            mediaPlayer.setOnCompletionListener(this);
             mediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
             descriptor.close();
             mediaPlayer.prepare();
@@ -44,5 +51,11 @@ public class AudioManager implements IAudioManager {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
         }
+    }
+
+    @Override
+    public void onCompletion(MediaPlayer mp) {
+        mp.stop();
+        play(list);
     }
 }
