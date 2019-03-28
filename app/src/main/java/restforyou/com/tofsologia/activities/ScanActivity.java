@@ -21,6 +21,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import restforyou.com.tofsologia.R;
+import restforyou.com.tofsologia.model.DbManager;
 import restforyou.com.tofsologia.model.Record;
 import restforyou.com.tofsologia.utils.Constants;
 import restforyou.com.tofsologia.utils.photo.PhotoUtils;
@@ -37,6 +38,13 @@ public class ScanActivity extends AppCompatActivity implements Constants, Adapte
 
     private File capturedPhotoFile = null;
 
+    private AdapterCallback onItemClickedListener = new AdapterCallback() {
+        @Override
+        public void onItemClick(Record record, int position) {
+            Toast.makeText(ScanActivity.this, "clicked", Toast.LENGTH_LONG).show();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,22 +57,17 @@ public class ScanActivity extends AppCompatActivity implements Constants, Adapte
 
 
     private void setInitialUiElements() {
-
-        recycler.setLayoutManager(new GridLayoutManager(this, 2));
-        recycler.setAdapter(new HistoryAdapter(getRecords(), this));
-
+        getRecords();
     }
 
-    private List<Record> getRecords() {
-
-        // mock
-        List<Record> records = new ArrayList<>();
-        Record record = new Record();
-        record.setId(-1);
-        record.setDescription(getResources().getString(R.string.text));
-        record.setFileName("FileName");
-        for (int i = 0; i < 10; i++) records.add(record);
-        return records;
+    private void getRecords() {
+        DbManager.getInstance().getAllRecords(new DbManager.OnResult<List<Record>>() {
+            @Override
+            public void onResult(List<Record> result) {
+                recycler.setLayoutManager(new GridLayoutManager(ScanActivity.this, 2));
+                recycler.setAdapter(new HistoryAdapter(result, onItemClickedListener));
+            }
+        });
 
     }
 
@@ -130,8 +133,13 @@ public class ScanActivity extends AppCompatActivity implements Constants, Adapte
                 break;
 
             case REQUEST_CAPTURE_IMAGE:
-                final Uri imageUri = Uri.fromFile(capturedPhotoFile);
-                showTextRecognitionActivity(imageUri);
+                if(resultCode == RESULT_OK){
+                    final Uri imageUri = Uri.fromFile(capturedPhotoFile);
+                    showTextRecognitionActivity(imageUri);
+                }else if (resultCode == RESULT_CANCELED || data == null){
+                    Toast.makeText(ScanActivity.this, "Something went wrong...", Toast.LENGTH_LONG).show();
+                }
+
                 break;
         }
 
@@ -154,16 +162,5 @@ public class ScanActivity extends AppCompatActivity implements Constants, Adapte
     public void onItemClick(Record record, int position) {
         Log.d("TAG", "onItemClick: " + position);
     }
-
-    //part for text recognition activity
-//    private void showPrewiew(Bitmap bitmap) {
-//        materialButton.setText("Recognize");
-//        materialButton.setVisibility(View.VISIBLE);
-//        imageViewTempPhoto.setVisibility(View.GONE);
-//        textViewEmptyText.setVisibility(View.GONE);
-//        imageViewReadyImg.setVisibility(View.VISIBLE);
-//        imageViewReadyImg.setImageBitmap(bitmap);
-//    }
-
 
 }
