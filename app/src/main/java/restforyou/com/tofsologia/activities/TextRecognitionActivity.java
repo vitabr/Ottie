@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.media.ExifInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.Comparator;
@@ -85,9 +88,36 @@ public class TextRecognitionActivity extends AppCompatActivity {
         try {
             imageStream = getContentResolver().openInputStream(imageUri);
             mBitmapForRecognition = BitmapFactory.decodeStream(imageStream);
-            mImageForRecognition.setImageBitmap(mBitmapForRecognition);
             mBitmapForRecognition = mBitmapForRecognition.copy(mBitmapForRecognition.getConfig(), true);
 
+//            ExifInterface ei = new ExifInterface(imageUriString);
+//            int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+//                    ExifInterface.ORIENTATION_UNDEFINED);
+
+            Bitmap rotatedBitmap = mBitmapForRecognition;
+            rotatedBitmap = rotateImage(mBitmapForRecognition, 90);
+//            switch(orientation) {
+//
+//                case ExifInterface.ORIENTATION_ROTATE_90:
+//                    rotatedBitmap = rotateImage(mBitmapForRecognition, 90);
+//                    break;
+//
+//                case ExifInterface.ORIENTATION_ROTATE_180:
+//                    rotatedBitmap = rotateImage(mBitmapForRecognition, 180);
+//                    break;
+//
+//                case ExifInterface.ORIENTATION_ROTATE_270:
+//                    rotatedBitmap = rotateImage(mBitmapForRecognition, 270);
+//                    break;
+//
+//                case ExifInterface.ORIENTATION_NORMAL:
+//                default:
+//                    rotatedBitmap = mBitmapForRecognition;
+//            }
+
+            mBitmapForRecognition = rotatedBitmap;
+
+            mImageForRecognition.setImageBitmap(mBitmapForRecognition);
             MLKit.recognize(mBitmapForRecognition, new MLKit.OnRecognizeListener() {
                 @Override
                 public void onSuccess(FirebaseVisionText texts) {
@@ -101,7 +131,16 @@ public class TextRecognitionActivity extends AppCompatActivity {
             });
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+
+    public static Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                matrix, true);
     }
 
     private void processTextRecognitionResult(FirebaseVisionText texts){

@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -267,17 +268,24 @@ public class WorkingExampleActivity extends AppCompatActivity implements Adapter
         return new Pair<>(targetWidth, targetHeight);
     }
 
+    public static Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                matrix, true);
+    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
         mGraphicOverlay.clear();
         switch (position) {
             case 0:
-                mSelectedImage = getBitmapFromAsset(this, "09.jpg");
+                mSelectedImage = getBitmapFromAsset(this, "1.jpg");
                 break;
             case 1:
                 // Whatever you want to happen when the thrid item gets selected
-                mSelectedImage = getBitmapFromAsset(this, "text2.jpg");
+                mSelectedImage = getBitmapFromAsset(this, "12.jpg");
+                mSelectedImage = rotateImage(mSelectedImage,90);
                 break;
             case 2:
                 // Whatever you want to happen when the thrid item gets selected
