@@ -9,8 +9,9 @@ import android.widget.Button;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import restforyou.com.tofsologia.R;
+import restforyou.com.tofsologia.utils.Constants;
 
-public class ModesActivity extends AppCompatActivity {
+public class ModesActivity extends AppCompatActivity implements Constants {
 
     @BindView(R.id.btn_simple_mode)
     Button buttonSimpleMode;
@@ -26,21 +27,22 @@ public class ModesActivity extends AppCompatActivity {
         buttonSimpleMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             toPlayActivity();
+             toPlayActivity(MODE_LETTER);
             }
         });
 
         buttonMiddleMode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toPlayActivity();
+                toPlayActivity(MODE_WORD);
             }
         });
 
     }
 
-    private void toPlayActivity(){
+    private void toPlayActivity(String mode){
         Intent toPlayActivity = new Intent(ModesActivity.this, PlayActivity.class);
+        toPlayActivity.putExtra(MODE, mode);
         startActivity(toPlayActivity);
     }
 }

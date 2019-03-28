@@ -1,6 +1,7 @@
 package restforyou.com.tofsologia.activities;
 
 import android.content.Intent;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,14 +22,21 @@ import restforyou.com.tofsologia.utils.photo.PhotoUtils;
 public class PlayActivity extends AppCompatActivity implements Constants {
 
     private String[] letters = {"a","b","c"};
-    private String[] words = {"momy", "dady", "child", "world"};
+    private String[] words = {"mommy", "daddy", "child", "world"};
     private File capturedPhotoFile = null;
+    private int index = 0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
+        String mode = getIntent().getStringExtra(MODE);
+        if(mode.equals(MODE_LETTER)){
+            //todo
+        }else{
+            //todo
+        }
 
     }
 

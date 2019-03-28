@@ -9,4 +9,8 @@ public interface Constants {
     String DATABASE = "DATABASE";
     String RECORD_EXIST = "RECORD_EXIST";
     String CURRENT_RECORD_ID = "CURRENT_RECORD_ID";
+
+    String MODE = "mode";
+    String MODE_LETTER = "letter";
+    String MODE_WORD = "word";
 }
