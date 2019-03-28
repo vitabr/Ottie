@@ -6,10 +6,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.media.ExifInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -57,6 +59,7 @@ public class TextRecognitionActivity extends AppCompatActivity {
     private String mResultText;
     private String imageUriString;
     private Record mRecord;
+    private Handler mHandler = new Handler();
 
 
     @Override
@@ -118,17 +121,7 @@ public class TextRecognitionActivity extends AppCompatActivity {
             mBitmapForRecognition = rotatedBitmap;
 
             mImageForRecognition.setImageBitmap(mBitmapForRecognition);
-            MLKit.recognize(mBitmapForRecognition, new MLKit.OnRecognizeListener() {
-                @Override
-                public void onSuccess(FirebaseVisionText texts) {
-                    processTextRecognitionResult(texts);
-                }
-
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    e.printStackTrace();
-                }
-            });
+            recognize(mBitmapForRecognition,0.1f);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -136,10 +129,50 @@ public class TextRecognitionActivity extends AppCompatActivity {
         }
     }
 
-    public static Bitmap rotateImage(Bitmap source, float angle) {
+    private void recognize(final Bitmap bitmap, final float scale){
+        final Bitmap newBitmap = scaleImage(mBitmapForRecognition, scale);
+        MLKit.recognize(newBitmap, new MLKit.OnRecognizeListener() {
+            @Override
+            public void onSuccess(FirebaseVisionText texts) {
+                Log.e("xxx", "recognize text on image with scale:" +scale);
+                if(scale <= 2 && scale != -1) {
+                    if (TextUtils.isEmpty(texts.getText())) {
+                        final float newScale = scale + 0.1f;
+                        mImageForRecognition.setImageBitmap(newBitmap);
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                recognize(newBitmap, newScale);
+                            }
+                        }, 1000);
+                    }else {
+                        processTextRecognitionResult(texts);
+                        return;
+                    }
+                }else if(scale != -1){
+                    recognize(newBitmap, -1);
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    private Bitmap rotateImage(Bitmap source, float angle) {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                matrix, true);
+    }
+
+    private  Bitmap scaleImage(Bitmap source, float scale) {
+        Matrix matrix = new Matrix();
+        matrix.postScale(scale, scale);
+        return Bitmap.createBitmap(source, 0, 0, (int)(Math.ceil(source.getWidth())), (int)(Math.ceil(source.getHeight())),
                 matrix, true);
     }
 
