@@ -2,10 +2,9 @@ package restforyou.com.tofsologia.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -15,7 +14,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import restforyou.com.tofsologia.App;
 import restforyou.com.tofsologia.R;
 import restforyou.com.tofsologia.model.DbManager;
 import restforyou.com.tofsologia.model.Record;
