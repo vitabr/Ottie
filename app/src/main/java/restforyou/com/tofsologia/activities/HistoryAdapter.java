@@ -1,6 +1,5 @@
 package restforyou.com.tofsologia.activities;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,7 +12,7 @@ import java.util.List;
 import restforyou.com.tofsologia.R;
 import restforyou.com.tofsologia.model.Record;
 
-public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>{
+public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder> {
 
 
     private final AdapterCallback listener;
@@ -22,13 +21,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
     HistoryAdapter(List<Record> records, AdapterCallback listener) {
         this.records = records;
-        this.listener = listener ;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_view, parent, false );
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_view, parent, false);
         return new HistoryViewHolder(v);
     }
 
@@ -43,8 +42,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
     }
 
 
-
-    public class HistoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+    public class HistoryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private final TextView title, content;
 
@@ -58,7 +56,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.HistoryV
 
         @Override
         public void onClick(View view) {
-            if(listener != null) {
+            if (listener != null) {
                 final int position = getAdapterPosition();
                 listener.onItemClick(records.get(position), position);
             }
