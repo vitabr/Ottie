@@ -61,7 +61,6 @@ dependencies {
     annotationProcessor "android.arch.persistence.room:compiler:${roomVersion}"
 
 
-
 }
 
 apply plugin: 'com.google.gms.google-services'
