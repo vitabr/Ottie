@@ -16,10 +16,12 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import restforyou.com.tofsologia.R;
 import restforyou.com.tofsologia.utils.Constants;
 import restforyou.com.tofsologia.utils.audimanager.AudioManager;
+import restforyou.com.tofsologia.utils.audimanager.IAudioManager;
 import restforyou.com.tofsologia.utils.photo.PhotoUtils;
 
 public class PlayActivity extends AppCompatActivity implements Constants {
@@ -28,6 +30,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     private String[] words = {"mommy", "daddy", "child", "world"};
     private File capturedPhotoFile = null;
     private int index = 0;
+    private IAudioManager audioManager = new AudioManager(this);
 
 
     @Override
@@ -35,11 +38,13 @@ public class PlayActivity extends AppCompatActivity implements Constants {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
         String mode = getIntent().getStringExtra(MODE);
+
         if(mode.equals(MODE_LETTER)){
             //todo
         }else{
             //todo
-            playAssetSound(this,"hello_kids.wav");
+            audioManager.play(new ArrayList<String>(){{add("child.wav"); add("daddy.wav"); add("hello_kids.wav");}});
+          // playAssetSound(this,"hello_kids.wav");
         }
 
     }
