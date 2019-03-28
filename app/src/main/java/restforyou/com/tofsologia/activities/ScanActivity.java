@@ -76,7 +76,7 @@ public class ScanActivity extends AppCompatActivity implements Constants, Adapte
             @Override
             public void onClick(View view) {
                 //dispatchTakePictureIntent();
-                showTextRecognitionActivity("");
+                showTextRecognitionActivity(null);
             }
         });
 
@@ -149,15 +149,16 @@ public class ScanActivity extends AppCompatActivity implements Constants, Adapte
 
     private void showTextRecognitionActivity(Uri imageUri) {
         logIt(imageUri + " ");
+
+        logIt(imageUri + " ");
+        Intent toTextRecActivityIntent = new Intent(ScanActivity.this, PlayActivity.class);
+        //Intent toTextRecActivityIntent = new Intent(ScanActivity.this, TextRecognitionActivity.class);
+        //Intent toTextRecActivityIntent = new Intent(ScanActivity.this, WorkingExampleActivity.class);
+        //toTextRecActivityIntent.setAction(Constants.RECEIVED_IMAGE);
         if (imageUri != null) {
-            logIt(imageUri + " ");
-            Intent toTextRecActivityIntent = new Intent(ScanActivity.this, PlayActivity.class);
-            //Intent toTextRecActivityIntent = new Intent(ScanActivity.this, TextRecognitionActivity.class);
-            //Intent toTextRecActivityIntent = new Intent(ScanActivity.this, WorkingExampleActivity.class);
-            //toTextRecActivityIntent.setAction(Constants.RECEIVED_IMAGE);
             toTextRecActivityIntent.putExtra(Constants.IMAGE_URL, imageUri.toString());
-            startActivity(toTextRecActivityIntent);
         }
+        startActivity(toTextRecActivityIntent);
     }
 
     @Override
