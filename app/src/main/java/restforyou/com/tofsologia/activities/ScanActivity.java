@@ -3,43 +3,47 @@ package restforyou.com.tofsologia.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.support.design.button.MaterialButton;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import restforyou.com.tofsologia.R;
+import restforyou.com.tofsologia.model.DbManager;
+import restforyou.com.tofsologia.model.Record;
 import restforyou.com.tofsologia.utils.Constants;
 import restforyou.com.tofsologia.utils.photo.PhotoUtils;
 
-public class ScanActivity extends AppCompatActivity implements Constants {
+public class ScanActivity extends AppCompatActivity implements Constants, AdapterCallback {
 
 
     @BindView(R.id.btn_make_picture)
     Button buttonMakePicture;
-    @BindView(R.id.btn_choose_from_galery)
-    Button buttonChoosefromGalery;
-    @BindView(R.id.img_temporary_picture)
-    ImageView imageViewTempPhoto;
-    @BindView(R.id.floatingActionButton)
-    MaterialButton materialButton;
-    @BindView(R.id.tv_empty_text)
-    TextView textViewEmptyText;
-    @BindView(R.id.img_ready_photo)
-    ImageView imageViewReadyImg;
+    @BindView(R.id.btn_choose_from_gallery)
+    Button buttonChooseFromGallery;
+    @BindView(R.id.recycler)
+    RecyclerView recycler;
 
     private File capturedPhotoFile = null;
+
+    private AdapterCallback onItemClickedListener = new AdapterCallback() {
+        @Override
+        public void onItemClick(Record record, int position) {
+            Toast.makeText(ScanActivity.this, "clicked", Toast.LENGTH_LONG).show();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +52,22 @@ public class ScanActivity extends AppCompatActivity implements Constants {
         ButterKnife.bind(this);
         setListeners();
         setInitialUiElements();
+
     }
 
 
     private void setInitialUiElements() {
+        getRecords();
+    }
 
+    private void getRecords() {
+        DbManager.getInstance().getAllRecords(new DbManager.OnResult<List<Record>>() {
+            @Override
+            public void onResult(List<Record> result) {
+                recycler.setLayoutManager(new GridLayoutManager(ScanActivity.this, 2));
+                recycler.setAdapter(new HistoryAdapter(result, onItemClickedListener));
+            }
+        });
 
     }
 
@@ -64,7 +79,7 @@ public class ScanActivity extends AppCompatActivity implements Constants {
             }
         });
 
-        buttonChoosefromGalery.setOnClickListener(new View.OnClickListener() {
+        buttonChooseFromGallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -99,7 +114,6 @@ public class ScanActivity extends AppCompatActivity implements Constants {
     }
 
 
-
     private void logIt(String message) {
         String TAG = this.getClass().getSimpleName();
         Log.e(TAG, message);
@@ -119,8 +133,13 @@ public class ScanActivity extends AppCompatActivity implements Constants {
                 break;
 
             case REQUEST_CAPTURE_IMAGE:
-                final Uri imageUri = Uri.fromFile(capturedPhotoFile);
-                showTextRecognitionActivity(imageUri);
+                if(resultCode == RESULT_OK){
+                    final Uri imageUri = Uri.fromFile(capturedPhotoFile);
+                    showTextRecognitionActivity(imageUri);
+                }else if (resultCode == RESULT_CANCELED || data == null){
+                    Toast.makeText(ScanActivity.this, "Something went wrong...", Toast.LENGTH_LONG).show();
+                }
+
                 break;
         }
 
@@ -139,16 +158,9 @@ public class ScanActivity extends AppCompatActivity implements Constants {
         }
     }
 
-    //part for text recognition activity
-//    private void showPrewiew(Bitmap bitmap) {
-//        materialButton.setText("Recognize");
-//        materialButton.setVisibility(View.VISIBLE);
-//        imageViewTempPhoto.setVisibility(View.GONE);
-//        textViewEmptyText.setVisibility(View.GONE);
-//        imageViewReadyImg.setVisibility(View.VISIBLE);
-//        imageViewReadyImg.setImageBitmap(bitmap);
-//    }
-
-
+    @Override
+    public void onItemClick(Record record, int position) {
+        Log.d("TAG", "onItemClick: " + position);
+    }
 
 }
