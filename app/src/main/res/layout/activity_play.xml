@@ -54,4 +54,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_media_play"
         android:onClick="dispatchTakePictureIntent"/>
+
+    <include
+        android:id="@+id/view_positive"
+        layout="@layout/pop_up_success"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_media_play"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/view_negative"
+        layout="@layout/pop_up_success"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_media_play"
+        android:visibility="gone"/>
+
 </android.support.constraint.ConstraintLayout>

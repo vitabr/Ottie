@@ -75,7 +75,8 @@ public class ScanActivity extends AppCompatActivity implements Constants, Adapte
         buttonMakePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dispatchTakePictureIntent();
+                //dispatchTakePictureIntent();
+                showTextRecognitionActivity("");
             }
         });
 

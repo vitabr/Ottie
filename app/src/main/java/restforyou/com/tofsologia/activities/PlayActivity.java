@@ -74,11 +74,20 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     }
 
     private void showPositiveView(){
-        //TODO
+        findViewById(R.id.view_positive).setVisibility(View.VISIBLE);
     }
 
     private void showNegativeView(){
-        //TODO
+
+        findViewById(R.id.view_negative).setVisibility(View.VISIBLE);
+    }
+
+    public void hidePositiveView(View v){
+        findViewById(R.id.view_positive).setVisibility(View.GONE);
+    }
+
+    public void hideNegativeView(View v){
+        findViewById(R.id.view_negative).setVisibility(View.GONE);
     }
 
     private void logIt(String message){
