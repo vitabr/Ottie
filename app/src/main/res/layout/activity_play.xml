@@ -89,7 +89,6 @@
         android:visibility="gone"/>
 
 
-
     <include
         android:id="@+id/view_negative_word"
         layout="@layout/pop_up_failed_word"

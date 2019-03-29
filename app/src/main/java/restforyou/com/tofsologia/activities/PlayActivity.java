@@ -176,18 +176,26 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     }
 
     private void showPositiveView() {
-        findViewById(R.id.view_positive).setVisibility(View.VISIBLE);
+        if (mode.equals(MODE_LETTER)) {
+            findViewById(R.id.view_positive_letters).setVisibility(View.VISIBLE);
+        }else{
+            findViewById(R.id.view_positive_word).setVisibility(View.VISIBLE);
+        }
     }
 
     private void showNegativeView() {
-        findViewById(R.id.view_negative).setVisibility(View.VISIBLE);
+        if (mode.equals(MODE_LETTER)) {
+            findViewById(R.id.view_negative_letters).setVisibility(View.VISIBLE);
+        }else{
+            findViewById(R.id.view_negative_word).setVisibility(View.VISIBLE);
+        }
     }
 
     public void hidePositiveView(View v) {
-        findViewById(R.id.view_positive).setVisibility(View.GONE);
         index++;
         logIt("index " + index);
         if (mode.equals(MODE_LETTER)) {
+            findViewById(R.id.view_positive_letters).setVisibility(View.GONE);
             if (index > letters.length - 1) {
                 index = 0;
                 Intent toModesActivity = new Intent(PlayActivity.this, ModesActivity.class);
@@ -198,6 +206,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
             audioManager.playNextLetter(letters[index]);
             container.setText(letters[index].toUpperCase());
         } else {
+            findViewById(R.id.view_positive_word).setVisibility(View.GONE);
             if (index > words.length - 1) {
                 index = 0;
                 Intent toModesActivity = new Intent(PlayActivity.this, ModesActivity.class);
@@ -211,7 +220,12 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     }
 
     public void hideNegativeView(View v) {
-        findViewById(R.id.view_negative).setVisibility(View.GONE);
+        if (mode.equals(MODE_LETTER)) {
+            findViewById(R.id.view_negative_letters).setVisibility(View.GONE);
+        }else{
+
+            findViewById(R.id.view_negative_word).setVisibility(View.GONE);
+        }
     }
 
     private void logIt(String message) {
