@@ -4,29 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#99000000">
+    android:background="@color/play_bg_color">
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/faild_bg"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3"
-        app:srcCompat="@drawable/not_ok" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/word_bg" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline3"
+
+    <TextView
+        android:id="@+id/container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="199dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/kalam"
+        android:gravity="center"
+        android:textSize="50sp"
+        android:alpha="0.1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/faild_bg"
+        app:layout_constraintTop_toTopOf="@+id/faild_bg"
+        tools:text="Text" />
+
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp"
-        app:layout_constraintGuide_percent="0.2" />
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_horizontal"
+        android:text="Try again!"
+        android:fontFamily="@font/rubik_medium"
+        android:textColor="#f94670"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <Button
         android:id="@+id/button2"
@@ -35,11 +57,14 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Try again"
+        android:background="@drawable/button_keep_practice"
+        android:onClick="hidePositiveView"
+        android:text="@string/keep_practice"
+        android:textColor="@android:color/white"
+        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:onClick="hideNegativeView"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline4"
@@ -48,30 +73,14 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.95" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+    <ImageView
+        android:id="@+id/ic_back_dark"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="2/30" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
+        app:srcCompat="@drawable/ic_back_dark" />
 
 </android.support.constraint.ConstraintLayout>

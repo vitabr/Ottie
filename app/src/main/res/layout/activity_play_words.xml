@@ -43,7 +43,7 @@
     <include
         android:id="@+id/view_negative"
         layout="@layout/pop_up_failed_word"
-        android:visibility="invisible"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

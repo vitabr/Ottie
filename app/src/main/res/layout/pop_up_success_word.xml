@@ -81,6 +81,14 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.95" />
 
-
+    <ImageView
+        android:id="@+id/ic_back_dark"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_dark" />
 
 </android.support.constraint.ConstraintLayout>
