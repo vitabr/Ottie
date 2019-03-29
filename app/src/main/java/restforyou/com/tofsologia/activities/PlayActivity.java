@@ -169,7 +169,12 @@ public class PlayActivity extends AppCompatActivity implements Constants {
         expectedText = expectedText.toLowerCase();
         logIt("expected:" + expectedText + ", found:" + foundText);
         if (foundText.contains(expectedText)) {
-            showPositiveView();
+            container.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    showPositiveView();
+                }
+            },1500 );
         } else {
             showNegativeView();
         }
