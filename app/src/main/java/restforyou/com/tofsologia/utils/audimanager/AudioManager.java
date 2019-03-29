@@ -44,7 +44,7 @@ public class AudioManager implements MediaPlayer.OnCompletionListener {
 
         ArrayList sounds = new ArrayList<String>();
         sounds.add("hello_kids.wav");
-        sounds.add("lets_write_the_words_2.wav");
+        sounds.add("lets_write_the_words.wav");
         sounds.add(word + ".wav");
         play(sounds);
     }
@@ -53,7 +53,7 @@ public class AudioManager implements MediaPlayer.OnCompletionListener {
     public void playNextWord(String word){
 
         ArrayList sounds = new ArrayList<String>();
-        sounds.add("lets_write_the_words_2.wav");
+        sounds.add("lets_write_the_words.wav");
         sounds.add(word + ".wav");
         play(sounds);
     }

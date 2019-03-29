@@ -32,7 +32,7 @@ import restforyou.com.tofsologia.utils.photo.PhotoUtils;
 
 public class PlayActivity extends AppCompatActivity implements Constants {
 
-    private String[] letters = {"a","b","c"};
+    private String[] letters = {"a", "b", "c"};
     private String[] words = {"child", "daddy", "mommy", "child", "world"};
     private File capturedPhotoFile = null;
     private int index = 0;
@@ -56,7 +56,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
         if (mode.equals(MODE_LETTER)) {
             container.setText(letters[index].toUpperCase());
             audioManager.playWelcomeLetter(letters[index]);
-        }else{
+        } else {
             container.setText(words[index]);
             audioManager.playWelcomeWord(words[index]);
         }
@@ -93,12 +93,12 @@ public class PlayActivity extends AppCompatActivity implements Constants {
                 if (resultCode == RESULT_OK) {
                     final Uri imageUri = Uri.fromFile(capturedPhotoFile);
                     foundTexts = "";
-                    if(mode.equals(MODE_LETTER)) {
+                    if (mode.equals(MODE_LETTER)) {
                         showPositiveView();
-                    }else{
+                    } else {
                         handleImage(imageUri);
                     }
-                }else if (resultCode == RESULT_CANCELED || data == null){
+                } else if (resultCode == RESULT_CANCELED || data == null) {
                     Toast.makeText(PlayActivity.this, "Something went wrong...", Toast.LENGTH_LONG).show();
                 }
                 break;
@@ -106,7 +106,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
 
     }
 
-    private void handleImage(Uri imageUri){
+    private void handleImage(Uri imageUri) {
         final InputStream imageStream;
         try {
             imageStream = getContentResolver().openInputStream(imageUri);
@@ -116,7 +116,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
             Bitmap rotatedBitmap = rotateImage(mBitmapForRecognition, 90);
 
             mBitmapForRecognition = rotatedBitmap;
-            recognize(mBitmapForRecognition,0.2f);
+            recognize(mBitmapForRecognition, 0.2f);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -124,18 +124,18 @@ public class PlayActivity extends AppCompatActivity implements Constants {
         }
     }
 
-    private void recognize(final Bitmap bitmap, final float scale){
+    private void recognize(final Bitmap bitmap, final float scale) {
         final Bitmap newBitmap = scaleImage(mBitmapForRecognition, scale);
         findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
         MLKit.recognize(newBitmap, new MLKit.OnRecognizeListener() {
             @Override
             public void onSuccess(FirebaseVisionText texts) {
-                Log.e("xxx", "recognize text on image with scale:" +scale);
-                if(scale < 2 && scale != -1) {
+                Log.e("xxx", "recognize text on image with scale:" + scale);
+                if (scale < 2 && scale != -1) {
                     foundTexts += texts.getText();
                     final float newScale = scale + 0.2f;
                     recognize(newBitmap, newScale);
-                }else{// if(scale != -1){
+                } else {// if(scale != -1){
                     //recognize(newBitmap, -1);
                     processTextRecognitionResult(texts);
                 }
@@ -155,27 +155,27 @@ public class PlayActivity extends AppCompatActivity implements Constants {
                 matrix, true);
     }
 
-    private  Bitmap scaleImage(Bitmap source, float scale) {
+    private Bitmap scaleImage(Bitmap source, float scale) {
         Matrix matrix = new Matrix();
         matrix.postScale(scale, scale);
-        return Bitmap.createBitmap(source, 0, 0, (int)(Math.ceil(source.getWidth())), (int)(Math.ceil(source.getHeight())),
+        return Bitmap.createBitmap(source, 0, 0, (int) (Math.ceil(source.getWidth())), (int) (Math.ceil(source.getHeight())),
                 matrix, true);
     }
 
-    private void processTextRecognitionResult(FirebaseVisionText texts){
+    private void processTextRecognitionResult(FirebaseVisionText texts) {
         findViewById(R.id.progress_bar).setVisibility(View.INVISIBLE);
         String foundText = foundTexts.toLowerCase(); //texts.getText();
-        String expectedText = (mode.equals(MODE_LETTER))? letters[index] : words[index];
+        String expectedText = (mode.equals(MODE_LETTER)) ? letters[index] : words[index];
         expectedText = expectedText.toLowerCase();
         logIt("expected:" + expectedText + ", found:" + foundText);
-        if(foundText.contains(expectedText)){
+        if (foundText.contains(expectedText)) {
             showPositiveView();
-        }else{
+        } else {
             showNegativeView();
         }
     }
 
-    private void showPositiveView(){
+    private void showPositiveView() {
         findViewById(R.id.view_positive).setVisibility(View.VISIBLE);
     }
 
@@ -186,9 +186,9 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     public void hidePositiveView(View v) {
         findViewById(R.id.view_positive).setVisibility(View.GONE);
         index++;
-        logIt("index "+index);
-        if(mode.equals(MODE_LETTER)){
-            if (index > letters.length-1){
+        logIt("index " + index);
+        if (mode.equals(MODE_LETTER)) {
+            if (index > letters.length - 1) {
                 index = 0;
                 Intent toModesActivity = new Intent(PlayActivity.this, ModesActivity.class);
                 startActivity(toModesActivity);
@@ -197,8 +197,8 @@ public class PlayActivity extends AppCompatActivity implements Constants {
             }
             audioManager.playNextLetter(letters[index]);
             container.setText(letters[index].toUpperCase());
-        }else {
-            if (index > words.length-1){
+        } else {
+            if (index > words.length - 1) {
                 index = 0;
                 Intent toModesActivity = new Intent(PlayActivity.this, ModesActivity.class);
                 startActivity(toModesActivity);
@@ -214,7 +214,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
         findViewById(R.id.view_negative).setVisibility(View.GONE);
     }
 
-    private void logIt(String message){
+    private void logIt(String message) {
         String TAG = this.getClass().getSimpleName();
         Log.e(TAG, message);
     }
