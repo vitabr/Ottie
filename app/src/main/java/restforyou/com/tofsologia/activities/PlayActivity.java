@@ -41,6 +41,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     private int index = 0;
     private String mode;
     private IAudioManager audioManager = new AudioManager(this);
+
     private Bitmap mBitmapForRecognition;
     private String foundTexts = "";
 
@@ -60,8 +61,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
             sounds.add("daddy.wav");
             sounds.add("hello_kids.wav");
             audioManager.play(sounds);
-          // playAssetSound(this,"hello_kids.wav");
-            //playAssetSound(this,"Lets_write_the_words_2.wav");
+
         }
 
     }
@@ -131,6 +131,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
 
     private void recognize(final Bitmap bitmap, final float scale){
         final Bitmap newBitmap = scaleImage(mBitmapForRecognition, scale);
+        findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
         MLKit.recognize(newBitmap, new MLKit.OnRecognizeListener() {
             @Override
             public void onSuccess(FirebaseVisionText texts) {
@@ -167,6 +168,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     }
 
     private void processTextRecognitionResult(FirebaseVisionText texts){
+        findViewById(R.id.progress_bar).setVisibility(View.INVISIBLE);
         String foundText = foundTexts.toLowerCase(); //texts.getText();
         String expectedText = (mode.equals(MODE_LETTER))? letters[index] : words[index];
         expectedText = expectedText.toLowerCase();
