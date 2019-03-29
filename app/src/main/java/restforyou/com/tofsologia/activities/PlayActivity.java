@@ -218,4 +218,10 @@ public class PlayActivity extends AppCompatActivity implements Constants {
         String TAG = this.getClass().getSimpleName();
         Log.e(TAG, message);
     }
+
+    @Override
+    protected void onDestroy() {
+        audioManager.stop();
+        super.onDestroy();
+    }
 }
