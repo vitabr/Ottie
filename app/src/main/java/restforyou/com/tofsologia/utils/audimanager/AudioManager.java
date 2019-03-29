@@ -7,7 +7,7 @@ import android.media.MediaPlayer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AudioManager implements IAudioManager, MediaPlayer.OnCompletionListener {
+public class AudioManager implements MediaPlayer.OnCompletionListener {
 
     private Context context;
     private MediaPlayer mediaPlayer;
@@ -18,7 +18,6 @@ public class AudioManager implements IAudioManager, MediaPlayer.OnCompletionList
         mediaPlayer = new MediaPlayer();
     }
 
-    @Override
     public void play(List<String> list) {
         this.list = list;
         if (list.size()>0) {
@@ -60,8 +59,9 @@ public class AudioManager implements IAudioManager, MediaPlayer.OnCompletionList
     }
 
     public void playGongrats(){
-        list = new ArrayList<>();
-        list.add("great_job.wav");
+        ArrayList sounds = new ArrayList<String>();
+        sounds.add("great_job.wav");
+        play(sounds);
     }
 
     private void playFile(String soundFileName) {
@@ -81,7 +81,6 @@ public class AudioManager implements IAudioManager, MediaPlayer.OnCompletionList
 
     }
 
-    @Override
     public void stop() {
         if (mediaPlayer != null) {
             mediaPlayer.stop();
