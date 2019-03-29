@@ -60,7 +60,7 @@
 
     <include
         android:id="@+id/view_positive"
-        layout="@layout/pop_up_success"
+        layout="@layout/pop_up_success_word"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +70,7 @@
 
     <include
         android:id="@+id/view_negative"
-        layout="@layout/pop_up_failed"
+        layout="@layout/pop_up_failed_word"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
