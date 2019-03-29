@@ -48,19 +48,13 @@
             android:screenOrientation="portrait" />
 
         <activity android:name=".activities.ModesActivity"
-            android:screenOrientation="portrait" ></activity>
+            android:screenOrientation="portrait" >
+
+        </activity>
+
         <activity android:name=".activities.PlayActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".activities.WorkingExampleActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.LoginActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.ScanActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.TextRecognitionActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activities.TextReadyActivity"
-            android:screenOrientation="portrait"/>
+
 
         <meta-data
             android:name="com.google.firebase.ml.vision.DEPENDENCIES"

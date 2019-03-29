@@ -80,6 +80,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:padding="8dp"
         android:fontFamily="@font/lobster"
         android:text="TextView"
         android:textSize="50sp"
