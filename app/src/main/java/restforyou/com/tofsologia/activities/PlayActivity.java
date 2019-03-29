@@ -52,21 +52,10 @@ public class PlayActivity extends AppCompatActivity implements Constants {
         mode = getIntent().getStringExtra(MODE);
 
         if(mode.equals(MODE_LETTER)){
-            //todo
-            ArrayList sounds = new ArrayList<String>();
-            sounds.add("hello_kids.wav");
-            sounds.add("Lets_write_the_letter.wav");
-            sounds.add(letters[index] +".wav");
-            audioManager.play(sounds);
+            audioManager.playWelcomeLetter(letters[index]);
         }else{
-            //todo
-            ArrayList sounds = new ArrayList<String>();
-            sounds.add("hello_kids.wav");
-            sounds.add("Lets_write_the_words_2.wav");
-            sounds.add(words[index] + ".wav");
-            audioManager.play(sounds);
-          // playAssetSound(this,"hello_kids.wav");
-            //playAssetSound(this,"Lets_write_the_words_2.wav");
+            audioManager.playWelcomeWord(words[index]);
+
         }
 
     }
