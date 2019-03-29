@@ -4,122 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.PlayActivity"
-    android:background="#1540c1"
-    >
+    android:background="@color/play_bg_color"
+    tools:context=".activities.PlayActivity">
 
-    <View
-        android:id="@+id/background"
-        android:layout_width="286dp"
-        android:layout_height="320dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/letter_bg"
-        app:layout_constraintEnd_toEndOf="@+id/container"
-        app:layout_constraintHorizontal_bias="0.529"
-        app:layout_constraintStart_toStartOf="@+id/container"
-        app:layout_constraintTop_toTopOf="@+id/container"
-        app:layout_constraintBottom_toBottomOf="@+id/container"
-
-        tools:layout_editor_absoluteY="205dp">
-
-    </View>
-
-
-    <TextView
-        android:id="@+id/tv_title"
+    <include
+        android:id="@+id/main"
+        layout="@layout/layout_letter_play"
         android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="@font/rubik_medium"
-        android:gravity="center"
-        android:text="Let's write letter"
-        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:textColor="#ffffff"
-        android:textSize="30sp"
-        android:textStyle="italic"
-        android:typeface="sans"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Lets write letter" />
-
-    <ImageView
-        android:id="@+id/iv_start_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="dispatchTakePictureIntent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_camera_nurmal"
-        tools:layout_editor_absoluteY="567dp" />
-
-    <include
-        android:id="@+id/view_positive"
-        layout="@layout/pop_up_success_word"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_media_play"
-        android:visibility="gone" />
-
-    <include
-        android:id="@+id/view_negative"
-        layout="@layout/pop_up_failed_word"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_media_play"
-        android:visibility="gone"/>
-
-    <include
-        android:id="@+id/progress_bar"
-        layout="@layout/wait"
-        android:visibility="invisible"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/kalam"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="@string/word_from_container"
-        android:textColor="#fbab03"
-        android:textSize="180sp"
-        app:layout_constraintBottom_toTopOf="@+id/iv_start_camera"
+    <include
+        android:id="@+id/progress_bar"
+        layout="@layout/wait"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="17dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
-        android:fontFamily="@font/rubik_medium"
-        android:text="Show your work"
-        android:textColor="@color/colorAccent"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
+    <include
+        android:id="@+id/view_positive"
+        layout="@layout/pop_up_success_letters"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_start_camera" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/view_negative"
+        layout="@layout/pop_up_failed_letters"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

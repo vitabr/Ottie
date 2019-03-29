@@ -163,7 +163,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     }
 
     private void processTextRecognitionResult(FirebaseVisionText texts) {
-        findViewById(R.id.progress_bar).setVisibility(View.INVISIBLE);
+       findViewById(R.id.progress_bar).setVisibility(View.INVISIBLE);
         String foundText = foundTexts.toLowerCase(); //texts.getText();
         String expectedText = (mode.equals(MODE_LETTER)) ? letters[index] : words[index];
         expectedText = expectedText.toLowerCase();
