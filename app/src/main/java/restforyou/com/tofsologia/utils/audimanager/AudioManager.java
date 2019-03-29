@@ -11,7 +11,6 @@ public class AudioManager implements IAudioManager, MediaPlayer.OnCompletionList
 
     private Context context;
     private MediaPlayer mediaPlayer;
-    private int currentFile = 0;
     private List<String> list;
 
     public AudioManager(Context context) {
@@ -22,9 +21,8 @@ public class AudioManager implements IAudioManager, MediaPlayer.OnCompletionList
     @Override
     public void play(List<String> list) {
         this.list = list;
-        if (currentFile < list.size()) {
-            playFile(list.get(currentFile));
-            currentFile++;
+        if (list.size()>0) {
+            playFile(list.get(0));
         }
     }
 
@@ -93,6 +91,9 @@ public class AudioManager implements IAudioManager, MediaPlayer.OnCompletionList
     @Override
     public void onCompletion(MediaPlayer mp) {
         mp.stop();
+        if(list.size()>0) {
+            list.remove(0);
+        }
         play(list);
     }
 }

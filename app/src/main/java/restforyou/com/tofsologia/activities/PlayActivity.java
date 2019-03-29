@@ -192,22 +192,6 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     public void hideNegativeView(View v){
         findViewById(R.id.view_negative).setVisibility(View.GONE);
     }
-    public static void playAssetSound(Context context, String soundFileName) {
-        try {
-            MediaPlayer mediaPlayer = new MediaPlayer();
-
-            AssetFileDescriptor descriptor = context.getAssets().openFd(soundFileName);
-            mediaPlayer.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
-            descriptor.close();
-
-            mediaPlayer.prepare();
-            mediaPlayer.setVolume(1f, 1f);
-            mediaPlayer.setLooping(false);
-            mediaPlayer.start();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     private void logIt(String message){
         String TAG = this.getClass().getSimpleName();
