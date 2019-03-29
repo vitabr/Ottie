@@ -37,7 +37,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     private File capturedPhotoFile = null;
     private int index = 0;
     private String mode;
-    private IAudioManager audioManager = new AudioManager(this);
+    private AudioManager audioManager = new AudioManager(this);
 
     private Bitmap mBitmapForRecognition;
     private String foundTexts = "";
