@@ -179,7 +179,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
         if (mode.equals(MODE_LETTER)) {
             findViewById(R.id.view_positive_letters).setVisibility(View.VISIBLE);
         }else{
-          //  findViewById(R.id.view_positive_word).setVisibility(View.VISIBLE);
+            findViewById(R.id.view_positive).setVisibility(View.VISIBLE);
         }
     }
 
@@ -187,7 +187,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
         if (mode.equals(MODE_LETTER)) {
             findViewById(R.id.view_negative_letters).setVisibility(View.VISIBLE);
         }else{
-            //findViewById(R.id.view_negative_word).setVisibility(View.VISIBLE);
+            findViewById(R.id.view_negative).setVisibility(View.VISIBLE);
         }
     }
 
