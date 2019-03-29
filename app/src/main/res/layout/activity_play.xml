@@ -39,15 +39,6 @@
         android:visibility="gone" />
 
     <include
-        android:id="@+id/view_positive_word"
-        layout="@layout/pop_up_success_word"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <include
         android:id="@+id/view_negative_letters"
         layout="@layout/pop_up_failed_letters"
         app:layout_constraintTop_toTopOf="parent"
@@ -56,15 +47,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_media_play"
         android:visibility="gone"/>
-
-
-    <include
-        android:id="@+id/view_negative_word"
-        layout="@layout/pop_up_failed_word"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
