@@ -173,17 +173,13 @@ public class PlayActivity extends AppCompatActivity implements Constants {
         }else{
             showNegativeView();
         }
-
     }
 
     private void showPositiveView(){
         findViewById(R.id.view_positive).setVisibility(View.VISIBLE);
-
-
     }
 
     private void showNegativeView() {
-
         findViewById(R.id.view_negative).setVisibility(View.VISIBLE);
     }
 
@@ -191,18 +187,26 @@ public class PlayActivity extends AppCompatActivity implements Constants {
         findViewById(R.id.view_positive).setVisibility(View.GONE);
         index++;
         logIt("index "+index);
-        if (index>letters.length-1){
-            index = 0;
-            Intent toModesActivity = new Intent(PlayActivity.this, PlayActivity.class);
-            startActivity(toModesActivity);
-        }else{
-            if(mode.equals(MODE_LETTER)){
-                audioManager.playNextLetter(letters[index]);
-                container.setText(letters[index].toUpperCase());
-            }else {
-                audioManager.playNextWord(words[index]);
-                container.setText(words[index]);
+        if(mode.equals(MODE_LETTER)){
+            if (index > letters.length-1){
+                index = 0;
+                Intent toModesActivity = new Intent(PlayActivity.this, ModesActivity.class);
+                startActivity(toModesActivity);
+                finish();
+                return;
             }
+            audioManager.playNextLetter(letters[index]);
+            container.setText(letters[index].toUpperCase());
+        }else {
+            if (index > words.length-1){
+                index = 0;
+                Intent toModesActivity = new Intent(PlayActivity.this, ModesActivity.class);
+                startActivity(toModesActivity);
+                finish();
+                return;
+            }
+            audioManager.playNextWord(words[index]);
+            container.setText(words[index]);
         }
     }
 
