@@ -58,20 +58,9 @@ public class PlayActivity extends AppCompatActivity implements Constants {
 
         mode = getIntent().getStringExtra(MODE);
         if (mode.equals(MODE_LETTER)) {
-            ArrayList sounds = new ArrayList<String>();
-            sounds.add("hello_kids.wav");
-            sounds.add("lets_write_the_letter.wav");
-            sounds.add("a.wav");
-            audioManager.play(sounds);
-            textViewLetters.setText(letters[index]);
+            audioManager.playWelcomeLetter(letters[index]);
         }else{
-            //todo
-            ArrayList sounds = new ArrayList<String>();
-            sounds.add("hello_kids.wav");
-            sounds.add("Lets_write_the_words_2.wav");
-            sounds.add("child.wav");
-            audioManager.play(sounds);
-            textViewLetters.setText(words[index]);
+            audioManager.playWelcomeWord(words[index]);
         }
 
     }
