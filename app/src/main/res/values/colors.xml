@@ -6,5 +6,6 @@
     <color name="colorAccent">#eceff1</color>
     <color name="colorLilac">#AD1457</color>
     <color name="colorBtnBackground">#eceff1</color>
+    <color name="play_bg_color">#1540c1</color>
 
 </resources>

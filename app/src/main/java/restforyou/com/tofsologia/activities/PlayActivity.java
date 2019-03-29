@@ -163,7 +163,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     }
 
     private void processTextRecognitionResult(FirebaseVisionText texts) {
-        findViewById(R.id.progress_bar).setVisibility(View.INVISIBLE);
+       findViewById(R.id.progress_bar).setVisibility(View.INVISIBLE);
         String foundText = foundTexts.toLowerCase(); //texts.getText();
         String expectedText = (mode.equals(MODE_LETTER)) ? letters[index] : words[index];
         expectedText = expectedText.toLowerCase();
@@ -179,7 +179,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
         if (mode.equals(MODE_LETTER)) {
             findViewById(R.id.view_positive_letters).setVisibility(View.VISIBLE);
         }else{
-            findViewById(R.id.view_positive_word).setVisibility(View.VISIBLE);
+          //  findViewById(R.id.view_positive_word).setVisibility(View.VISIBLE);
         }
     }
 
@@ -187,7 +187,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
         if (mode.equals(MODE_LETTER)) {
             findViewById(R.id.view_negative_letters).setVisibility(View.VISIBLE);
         }else{
-            findViewById(R.id.view_negative_word).setVisibility(View.VISIBLE);
+            //findViewById(R.id.view_negative_word).setVisibility(View.VISIBLE);
         }
     }
 
@@ -206,7 +206,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
             audioManager.playNextLetter(letters[index]);
             container.setText(letters[index].toUpperCase());
         } else {
-            findViewById(R.id.view_positive_word).setVisibility(View.GONE);
+         //   findViewById(R.id.view_positive_word).setVisibility(View.GONE);
             if (index > words.length - 1) {
                 index = 0;
                 Intent toModesActivity = new Intent(PlayActivity.this, ModesActivity.class);
@@ -224,7 +224,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
             findViewById(R.id.view_negative_letters).setVisibility(View.GONE);
         }else{
 
-            findViewById(R.id.view_negative_word).setVisibility(View.GONE);
+            //findViewById(R.id.view_negative_word).setVisibility(View.GONE);
         }
     }
 
