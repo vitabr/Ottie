@@ -24,4 +24,5 @@
     <string name="empty" />
     <string name="title">Title</string>
     <string name="content">Content</string>
+    <string name="keep_practice">Keep Practice</string>
 </resources>
