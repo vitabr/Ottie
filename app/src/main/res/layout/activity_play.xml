@@ -81,6 +81,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/lobster"
         android:text="TextView"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/iv_start_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
