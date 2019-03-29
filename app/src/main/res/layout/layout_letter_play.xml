@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.PlayActivity"
     android:background="@color/play_bg_color"
-    >
+    tools:context=".activities.PlayActivity">
 
     <View
         android:id="@+id/background"
@@ -14,11 +13,11 @@
         android:layout_height="320dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/letter_bg"
+        app:layout_constraintBottom_toBottomOf="@+id/container"
         app:layout_constraintEnd_toEndOf="@+id/container"
         app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="@+id/container"
         app:layout_constraintTop_toTopOf="@+id/container"
-        app:layout_constraintBottom_toBottomOf="@+id/container"
         tools:layout_editor_absoluteY="205dp">
 
     </View>
@@ -28,13 +27,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
         android:onClick="dispatchTakePictureIntent"
+        app:layout_constraintBottom_toTopOf="@+id/camera_btn_hint"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/container"
+        app:layout_constraintVertical_bias="0.85"
+        app:layout_constraintVertical_chainStyle="packed"
         app:srcCompat="@drawable/ic_camera_nurmal" />
 
     <TextView
@@ -65,7 +66,9 @@
         android:text="Show your work"
         android:textColor="@color/colorAccent"
         android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_start_camera" />
 
@@ -87,9 +90,9 @@
         android:layout_marginStart="61dp"
         android:layout_marginTop="82dp"
         android:layout_marginEnd="61dp"
+        android:fontFamily="@font/rubik_medium"
         android:gravity="center_horizontal"
         android:textColor="#ffffff"
-        android:fontFamily="@font/rubik_medium"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
