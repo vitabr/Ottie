@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -14,9 +15,9 @@ import restforyou.com.tofsologia.utils.Constants;
 public class ModesActivity extends AppCompatActivity implements Constants {
 
     @BindView(R.id.btn_simple_mode)
-    Button buttonSimpleMode;
+    ImageView buttonSimpleMode;
     @BindView(R.id.btn_middle_mode)
-    Button buttonMiddleMode;
+    ImageView buttonMiddleMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
