@@ -24,4 +24,5 @@
     <string name="empty" />
     <string name="title">Title</string>
     <string name="content">Content</string>
+    <string name="word_from_container">A</string>
 </resources>
