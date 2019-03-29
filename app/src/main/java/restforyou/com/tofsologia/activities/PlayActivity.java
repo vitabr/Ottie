@@ -16,6 +16,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.ml.vision.text.FirebaseVisionText;
@@ -44,19 +46,32 @@ public class PlayActivity extends AppCompatActivity implements Constants {
 
     private Bitmap mBitmapForRecognition;
     private String foundTexts = "";
+    private TextView textViewLetters;
+    private Button nextQuestion;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
+        textViewLetters = findViewById(R.id.textView5);
+
         mode = getIntent().getStringExtra(MODE);
-
-        if(mode.equals(MODE_LETTER)){
-            audioManager.playWelcomeLetter(letters[index]);
+        if (mode.equals(MODE_LETTER)) {
+            ArrayList sounds = new ArrayList<String>();
+            sounds.add("hello_kids.wav");
+            sounds.add("lets_write_the_letter.wav");
+            sounds.add("a.wav");
+            audioManager.play(sounds);
+            textViewLetters.setText(letters[index]);
         }else{
-            audioManager.playWelcomeWord(words[index]);
-
+            //todo
+            ArrayList sounds = new ArrayList<String>();
+            sounds.add("hello_kids.wav");
+            sounds.add("Lets_write_the_words_2.wav");
+            sounds.add("child.wav");
+            audioManager.play(sounds);
+            textViewLetters.setText(words[index]);
         }
 
     }
@@ -88,7 +103,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
         switch (reqCode) {
 
             case REQUEST_CAPTURE_IMAGE:
-                if(resultCode == RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     final Uri imageUri = Uri.fromFile(capturedPhotoFile);
                     foundTexts = "";
                     if(mode.equals(MODE_LETTER)) {
@@ -178,18 +193,29 @@ public class PlayActivity extends AppCompatActivity implements Constants {
 
     private void showPositiveView(){
         findViewById(R.id.view_positive).setVisibility(View.VISIBLE);
+
+
     }
 
-    private void showNegativeView(){
+    private void showNegativeView() {
 
         findViewById(R.id.view_negative).setVisibility(View.VISIBLE);
     }
 
-    public void hidePositiveView(View v){
+    public void hidePositiveView(View v) {
         findViewById(R.id.view_positive).setVisibility(View.GONE);
+        index++;
+        logIt("index "+index);
+        if (index>letters.length-1){
+            index = 0;
+            Intent toModesActivity = new Intent(PlayActivity.this, PlayActivity.class);
+            startActivity(toModesActivity);
+        }else{
+            textViewLetters.setText(letters[index]);
+        }
     }
 
-    public void hideNegativeView(View v){
+    public void hideNegativeView(View v) {
         findViewById(R.id.view_negative).setVisibility(View.GONE);
     }
 
