@@ -1,19 +1,15 @@
 package restforyou.com.tofsologia.activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +22,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 import restforyou.com.tofsologia.MLKit;
 import restforyou.com.tofsologia.R;
@@ -46,7 +41,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
 
     private Bitmap mBitmapForRecognition;
     private String foundTexts = "";
-    private TextView textViewLetters;
+    private TextView container;
     private Button nextQuestion;
 
 
@@ -54,12 +49,15 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-        textViewLetters = findViewById(R.id.textView5);
+        container = findViewById(R.id.container);
+
 
         mode = getIntent().getStringExtra(MODE);
         if (mode.equals(MODE_LETTER)) {
+            container.setText(letters[index].toUpperCase());
             audioManager.playWelcomeLetter(letters[index]);
         }else{
+            container.setText(words[index]);
             audioManager.playWelcomeWord(words[index]);
         }
 
@@ -109,8 +107,6 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     }
 
     private void handleImage(Uri imageUri){
-
-
         final InputStream imageStream;
         try {
             imageStream = getContentResolver().openInputStream(imageUri);
@@ -200,11 +196,12 @@ public class PlayActivity extends AppCompatActivity implements Constants {
             Intent toModesActivity = new Intent(PlayActivity.this, PlayActivity.class);
             startActivity(toModesActivity);
         }else{
-            textViewLetters.setText(letters[index]);
             if(mode.equals(MODE_LETTER)){
                 audioManager.playNextLetter(letters[index]);
+                container.setText(letters[index].toUpperCase());
             }else {
                 audioManager.playNextWord(words[index]);
+                container.setText(words[index]);
             }
         }
     }

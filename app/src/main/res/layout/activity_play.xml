@@ -64,15 +64,16 @@
     <include
         android:id="@+id/progress_bar"
         layout="@layout/wait"
-        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="invisible"
-        />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -81,7 +82,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/lobster"
         android:text="TextView"
-        android:textSize="36sp"
+        android:textSize="50sp"
         app:layout_constraintBottom_toTopOf="@+id/iv_start_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
