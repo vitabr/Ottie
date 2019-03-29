@@ -22,8 +22,8 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activities.SplashActivity"
-            android:screenOrientation="portrait"
+            android:name=".activities.ModesActivity"
+        android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,11 +47,11 @@
             android:name=".activities.TextReadyActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".activities.ModesActivity"
-            android:screenOrientation="portrait" >
+        <!--<activity android:name=".activities.ModesActivity"-->
+            <!--android:screenOrientation="portrait" >-->
 
-        </activity>
-
+        <!--</activity>-->
+ v
         <activity android:name=".activities.PlayActivity"
             android:screenOrientation="portrait"/>
 
