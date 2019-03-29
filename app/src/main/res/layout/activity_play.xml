@@ -5,8 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.PlayActivity"
-    android:background="#FFFFFF"
+    android:background="#1540c1"
     >
+
+    <View
+        android:id="@+id/background"
+        android:layout_width="286dp"
+        android:layout_height="320dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/letter_bg"
+        app:layout_constraintEnd_toEndOf="@+id/container"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="@+id/container"
+        app:layout_constraintTop_toTopOf="@+id/container"
+        app:layout_constraintBottom_toBottomOf="@+id/container"
+
+        tools:layout_editor_absoluteY="205dp">
+
+    </View>
+
 
     <TextView
         android:id="@+id/tv_title"
@@ -15,10 +32,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:fontFamily="@font/lobster"
+        android:fontFamily="@font/rubik_medium"
         android:gravity="center"
-        android:text="Hi! Lets write letter"
+        android:text="Let's write letter"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="#ffffff"
         android:textSize="30sp"
         android:textStyle="italic"
         android:typeface="sans"
@@ -27,19 +45,18 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Lets write letter" />
 
-
     <ImageView
         android:id="@+id/iv_start_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:onClick="dispatchTakePictureIntent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@android:drawable/ic_media_play"
-        android:onClick="dispatchTakePictureIntent"/>
+        app:srcCompat="@drawable/ic_camera_nurmal"
+        tools:layout_editor_absoluteY="567dp" />
 
     <include
         android:id="@+id/view_positive_letters"
@@ -89,10 +106,8 @@
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/container"
@@ -102,14 +117,31 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:padding="8dp"
+        android:fontFamily="@font/kalam"
         android:gravity="center"
-        android:fontFamily="@font/lobster"
-        android:text="TextView"
-        android:textSize="50sp"
+        android:padding="8dp"
+        android:text="@string/word_from_container"
+        android:textColor="#fbab03"
+        android:textSize="180sp"
         app:layout_constraintBottom_toTopOf="@+id/iv_start_camera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Show your work"
+        android:textColor="@color/colorAccent"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="@+id/progress_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_start_camera" />
 
 </android.support.constraint.ConstraintLayout>
