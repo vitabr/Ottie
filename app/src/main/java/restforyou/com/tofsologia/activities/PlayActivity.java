@@ -53,12 +53,17 @@ public class PlayActivity extends AppCompatActivity implements Constants {
 
         if(mode.equals(MODE_LETTER)){
             //todo
+            ArrayList sounds = new ArrayList<String>();
+            sounds.add("hello_kids.wav");
+            sounds.add("Lets_write_the_letter.wav");
+            sounds.add(letters[index] +".wav");
+            audioManager.play(sounds);
         }else{
             //todo
             ArrayList sounds = new ArrayList<String>();
-            sounds.add("child.wav");
-            sounds.add("daddy.wav");
             sounds.add("hello_kids.wav");
+            sounds.add("Lets_write_the_words_2.wav");
+            sounds.add(words[index] + ".wav");
             audioManager.play(sounds);
           // playAssetSound(this,"hello_kids.wav");
             //playAssetSound(this,"Lets_write_the_words_2.wav");
