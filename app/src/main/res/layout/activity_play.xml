@@ -46,6 +46,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@android:drawable/ic_media_play"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
 </android.support.constraint.ConstraintLayout>

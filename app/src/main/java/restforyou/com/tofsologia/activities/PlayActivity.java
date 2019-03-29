@@ -48,19 +48,19 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play);
-        container = findViewById(R.id.container);
-
-
         mode = getIntent().getStringExtra(MODE);
+
         if (mode.equals(MODE_LETTER)) {
+            setContentView(R.layout.activity_play);
+            container = findViewById(R.id.container);
             container.setText(letters[index].toUpperCase());
             audioManager.playWelcomeLetter(letters[index]);
         } else {
+            setContentView(R.layout.activity_play_words);
+            container = findViewById(R.id.container);
             container.setText(words[index]);
             audioManager.playWelcomeWord(words[index]);
         }
-
     }
 
     public void dispatchTakePictureIntent(View v) {
