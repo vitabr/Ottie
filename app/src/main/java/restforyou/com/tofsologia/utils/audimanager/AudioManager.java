@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.media.MediaPlayer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AudioManager implements IAudioManager, MediaPlayer.OnCompletionListener {
@@ -25,6 +26,44 @@ public class AudioManager implements IAudioManager, MediaPlayer.OnCompletionList
             playFile(list.get(currentFile));
             currentFile++;
         }
+    }
+
+    public void playWelcomeLetter(String letter){
+        ArrayList sounds = new ArrayList<String>();
+        sounds.add("hello_kids.wav");
+        sounds.add("Lets_write_the_letter.wav");
+        sounds.add(letter +".wav");
+        play(sounds);
+    }
+
+    public void playNextLetter(String letter){
+        ArrayList sounds = new ArrayList<String>();
+        sounds.add("Lets_write_the_letter.wav");
+        sounds.add(letter +".wav");
+        play(sounds);
+    }
+
+    public void playWelcomeWord(String word){
+
+        ArrayList sounds = new ArrayList<String>();
+        sounds.add("hello_kids.wav");
+        sounds.add("Lets_write_the_words_2.wav");
+        sounds.add(word + ".wav");
+        play(sounds);
+    }
+
+
+    public void playNextWord(String word){
+
+        ArrayList sounds = new ArrayList<String>();
+        sounds.add("Lets_write_the_words_2.wav");
+        sounds.add(word + ".wav");
+        play(sounds);
+    }
+
+    public void playGongrats(){
+        list = new ArrayList<>();
+        list.add("great_job.wav");
     }
 
     private void playFile(String soundFileName) {
