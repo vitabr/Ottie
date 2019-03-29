@@ -201,6 +201,11 @@ public class PlayActivity extends AppCompatActivity implements Constants {
             startActivity(toModesActivity);
         }else{
             textViewLetters.setText(letters[index]);
+            if(mode.equals(MODE_LETTER)){
+                audioManager.playNextLetter(letters[index]);
+            }else {
+                audioManager.playNextWord(words[index]);
+            }
         }
     }
 
