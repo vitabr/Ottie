@@ -13,7 +13,6 @@ public class AudioManager implements IAudioManager, MediaPlayer.OnCompletionList
     private int currentFile = 0;
     private List<String> list;
 
-
     public AudioManager(Context context) {
         this.context = context;
         mediaPlayer = new MediaPlayer();
@@ -44,7 +43,6 @@ public class AudioManager implements IAudioManager, MediaPlayer.OnCompletionList
         }
 
     }
-
 
     @Override
     public void stop() {
