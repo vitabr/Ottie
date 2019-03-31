@@ -94,7 +94,14 @@ public class PlayActivity extends AppCompatActivity implements Constants {
                     final Uri imageUri = Uri.fromFile(capturedPhotoFile);
                     foundTexts = "";
                     if (mode.equals(MODE_LETTER)) {
-                        showPositiveView();
+                        findViewById(R.id.progress_bar).setVisibility(View.VISIBLE);
+                        container.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                findViewById(R.id.progress_bar).setVisibility(View.INVISIBLE);
+                                showPositiveView();
+                            }
+                        },2000 );
                     } else {
                         handleImage(imageUri);
                     }
@@ -163,7 +170,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
     }
 
     private void processTextRecognitionResult(FirebaseVisionText texts) {
-       findViewById(R.id.progress_bar).setVisibility(View.INVISIBLE);
+
         String foundText = foundTexts.toLowerCase(); //texts.getText();
         String expectedText = (mode.equals(MODE_LETTER)) ? letters[index] : words[index];
         expectedText = expectedText.toLowerCase();
@@ -172,6 +179,7 @@ public class PlayActivity extends AppCompatActivity implements Constants {
             container.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    findViewById(R.id.progress_bar).setVisibility(View.INVISIBLE);
                     showPositiveView();
                 }
             },1500 );
